@@ -37,7 +37,7 @@ def processPost(nodeNum, file):
     link = "http://www.telliott.io/node/" + str(i)
     print link
 
-    allLines = open(file).read
+    allLines = open(file).read()
     allLines.replace("published: true", "published: true\npermalink: /node/" + str(i))
     out = open(file, 'w')
     out.write(allLines)   
