@@ -38,9 +38,10 @@ def processPost(nodeNum, file):
     print link
 
     allLines = open(file).read()
-    allLines.replace("published: true", "published: true\npermalink: /node/" + str(i))
+    allLines = allLines.replace("published: true", "published: true\npermalink: /node/" + str(i))
     out = open(file, 'w')
-    out.write(allLines)   
+    out.write(allLines)
+    out.close()
 
     if i < nodeNum:
     	return nodeNum + 1
