@@ -1,0 +1,74 @@
+---
+layout: post
+title: 'iOS Shooter: Initial Decisions'
+date: 2011-11-06 21:50:56.000000000 -05:00
+categories:
+- Coding
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  dsq_thread_id: '463653130'
+  tc-thumb-fld: a:2:{s:9:"_thumb_id";i:578;s:11:"_thumb_type";s:10:"attachment";}
+author:
+  login: Tom
+  email: tom.w.elliott@gmail.com
+  display_name: Tom
+  first_name: ''
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Docoptions: {}
+
+---
+<p><strong><a href="/assets/light.bulb_.jpg"><img class="alignright size-medium wp-image-578" title="light.bulb" src="/assets/light.bulb_-300x300.jpg" alt="" width="240" height="240" /></a>I've set out my goals, and done my research, so it's time for me to actually start making some decisions for my <a href="http://www.theothertomelliott.com/node/category/ios-shooter">iOS Shooter</a>. This week, I'm picking my concept, themes and major elements of playing style.</strong></p>
+<p>These ideas will be something of a road map for the rest of the design and planning process. As I said at the beginning, I'm aiming for simpler ideas, but I don't want the end product to be dull, either! No mean feat, but the more effort I put into planning and design, the smoother the implementation process will go.<!--more--></p>
+<h1>Concept and Themes</h1>
+<p>Having seen a host of air and space based games during my research, I figured I could try something a little bit distinctive. An <strong>underwater concept</strong> would still offer much of the same freedoms as air or space, as well as a lot of potential for a variety of enemies and environments.</p>
+<p>Looking at how some enemies swarmed in other games, it put me in mind of a vast simplification of how fish swim in shoals. Plus the natural obstacle concept could be neatly represented with coral and other living formations.</p>
+<p>Setting the game underwater would also provide a neat mechanism for showing level progression. Each level could be set deeper than the one before, and thus be darker. This also gives potential to introduce new enemies in a natural way, as you move from one "habitat" to the next. A similar sense of depth as used in "Sky Force" can also be employed, with each level divided into layers of depth.</p>
+<p>To fit with a watery setting, the pace of the game would naturally need to feel slower than the air or space based games. However, SketchNation and Sky Force showed that speed isn't everything in developing tension, and a quick succession of challenges to negotiate can more than make up for a more languid pace. And potentially even be more interesting to play.</p>
+<p>Another key element for concept and theming is that of the time period of the game. Options include a 20,000 leagues style steampunk setting, modern day "Abyss" style submarine technology or a way out futuristic aquatic spacecraft style. The steampunk style has been somewhat done to death in recent years, so I'm going to cross that one off straight away. The futuristic style is also a common one. So in the interests of being original, I'm going to go with the modern style.</p>
+<p>While I'll be trying to base a lot of the enemies on real aquatic animals, I'm keen to avoid the trap of blowing up adorable dolphins and upsetting Greenpeace. So the enemies themselves will need to be modified as to be based on, but not copies of, real sea life. Think squid with 4 tentacles. The plot summary will probably involve some sort of alien invasion of our oceans.</p>
+<h1>Gameplay</h1>
+<p>Based on research, I'm cherry picking a few key elements from the games I looked at, favouring the simplest where appropriate.</p>
+<p>First off, I'll be adopting a finger dragging control style, with guns always firing. This will avoid the need for tutorials, and be easier to implement. The fire rate of the guns will be limited to create gaps between projectiles, adding to the challenge of play.</p>
+<h2>Enemies</h2>
+<p>Enemies will be defined by several simple properties:</p>
+<ul>
+<li>Size</li>
+<li>Sprite</li>
+<li>Motion (patterns, relative to player, relative to other enemies)</li>
+<li>Weapons/firing patterns</li>
+<li>Hits to kill</li>
+</ul>
+<p>More complex enemy types may be created by combining individual, simpler enemies.</p>
+<h2>Obstacles</h2>
+<p>Obstacles will also be added to avoid. Due to the modern, underwater theme, these can include:</p>
+<ul>
+<li>Coral</li>
+<li>Oil rig supports</li>
+<li>Cliff edges</li>
+</ul>
+<p>Obstacles with significant vertical size may also be rendered as 3D objects. Although this will be dependant upon time.</p>
+<h2>Player</h2>
+<p>The player will be represented by a single "ship" type, with not option for significant upgrades or craft selection. Variation in the properties of the player will be provided by power ups that may be dropped by destroyed enemies or at random.</p>
+<p>The properties of the player will consist of the below:</p>
+<ul>
+<li>Size</li>
+<li>Sprite</li>
+<li>Speed (rate at which the player sprite "catches" up to the player's finger)</li>
+<li>Weapon</li>
+<li>Shields</li>
+<li>Lives</li>
+<li>Remaining air (optional)</li>
+</ul>
+<p>The final 5 may be improved with power-ups. I had considered avoiding the concept of shields, as in SHMUP, but this will make balancing the gameplay and difficulty curve difficult. Shields will be represented with a clear graphic at the bottom of the screen, and a traffic light style border around the screen to indicate low shields (as in Tyrian).</p>
+<p>The addition of remaining air would provide an interesting challenge, requiring the player to locate and reach extra oxygen to survive. Although this may complicate the interface, so may be dropped during more detailed design.</p>
+<p>A friend of mine provided me with an <a href="http://www.gamefaqs.com/genesis/563327-gunstar-heroes/faqs/29282">interesting link</a>, which outlines the weapons system used in Gunstar Heroes. This system allows combinations of 4 basic weapon types to create 10 distinct firing modes. While an interesting system, allowing for some novel tactical choices, it may be difficult to implement successfully. However, it would be worth making some prototypes and mockups incorporating the system.</p>
+<h2>Levels</h2>
+<p>Levels will be distinct and should be completable in around 2 minutes. There will be a progression screen (possibly showing statistics) between each level.</p>
+<p>Completing a level will require only that the player passes a "finish line". Levels will be grouped into "habitats", which may include: reef, kelp forest, oil rig, deep ocean and other regions. The end of each group of levels will feature a "boss" to defeat.</p>
+<h2>Scoring</h2>
+<p>Points will be awarded for destroying enemies, with extra points dropped as a pick up by enemies as they are destroyed. These will vary in value, with a small number of point drops being significantly more valuable than others.</p>
+<p><strong>Next up</strong>: Designs!</p>

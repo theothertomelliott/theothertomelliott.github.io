@@ -1,0 +1,33 @@
+---
+layout: post
+title: 'PS3 + Airport Extreme: Why it might not "just work", and how to fix it!'
+date: 2011-01-13 22:09:50.000000000 -05:00
+categories:
+- Tech
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  dsq_thread_id: ''
+  _wp_old_slug: ps3---airport-extreme:-why-it-might-not-"just-work"--and-how-to-fix-it!
+  _edit_last: '1'
+  tc-thumb-fld: a:2:{s:9:"_thumb_id";b:0;s:11:"_thumb_type";s:10:"attachment";}
+author:
+  login: Tom
+  email: tom.w.elliott@gmail.com
+  display_name: Tom
+  first_name: ''
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Docoptions: {}
+
+---
+<p><img src="/assets/airportps3.jpg" alt="" width="200" height="182" align="right" hspace="5" vspace="5" /><strong>I'll admit it, I'm a bit of an Apple addict. In my general experience, they make pretty things that "just work" and I've ended up filling my flat with various fruit-branded consumer goods. So imagine my dismay when I set up my brand new Airport Extreme base station and my PS3 refused to connect to it.</strong></p>
+<p>I'd finally gotten sick of random disconnections, unresolvable IPs and other inexplicable weirdness from the wireless router that O2 provided, and treated myself to an Airport Extreme, enticed by a combination of prettiness and the added bonus of disk and printer sharing.</p>
+<p>Admittedly, it wasn't exactly plug in and go, requiring me to install the Airport Utility on my Macbook and set up this key, that key and fix various settings reported as insecure. With the base station and my laptop configured, I set up the wireless connection on my iPhone: easy. Then my Mac Mini: easy but bloody time consuming using the remote. Finally I came to my PS3. I scanned for the network, entered the WPA key, skipped the remaining settings, and hit X.</p>
+<p>The dialog flickered between <em>'Connecting to access point...' </em>and <em>'Exchanging key information'</em> a few times, before informing me that the connection to the router had timed out. I tried again, with much the same result. I fiddled subtly with this setting and that setting, but to no avail.</p>
+<p>I was seriously beginning to consider turning the O2 box's wireless back on just so I could stream from LoveFilm, but some frustrated Googling led me to a bunch of posts about similar problems. Some had resorted to using WEP rather than WPA, which seemed to correct the issue. I wasn't going to settle for that, partly because WEP is known to be insecure, and partly because the latest Airport firmware doesn't support it. So I began to wonder what else I could try and played around a little more.</p>
+<p>As it turns out, the Airport Utility's handy password generator has a habit of inserting special characters (in my case a semicolon) which may be ignored by some Wi-Fi drivers, including those of the PS3. I knew WPA worked for the O2 box before, so I just set my Airport's WPA password to the same thing and it worked first time!</p>
+<p>So the solution (for anyone in a hurry):</p>
+<p><strong>Make sure your Airport's WPA password doesn't contain special characters. Stick to letters and numbers.</strong></p>
+<p>Now I just have to go back and reconfigure my Mac Mini. See you in a week.</p>

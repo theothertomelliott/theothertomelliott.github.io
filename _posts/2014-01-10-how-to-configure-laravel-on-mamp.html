@@ -1,0 +1,59 @@
+---
+layout: post
+title: How to Configure Laravel on MAMP
+date: 2014-01-10 03:58:02.000000000 -05:00
+categories:
+- Coding
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  dsq_thread_id: '2103877470'
+  tc-thumb-fld: a:2:{s:9:"_thumb_id";i:996;s:11:"_thumb_type";s:10:"attachment";}
+author:
+  login: Tom
+  email: tom.w.elliott@gmail.com
+  display_name: Tom
+  first_name: ''
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Docoptions: {}
+
+---
+<p><strong><a href="/assets/mamppro.gif"><img class="alignright size-full wp-image-996" src="/assets/mamppro.gif" alt="" width="237" height="200" /></a>Laravel is a powerful framework to speed PHP web development, MAMP is a handy GUI to allow quick and easy testing of websites on OS X. Smash them together and you get quick and easy web development on OS X.</strong></p>
+<p>My work at <a href="http://www.spotflux.com/">Spotflux</a> has recently involved a lot of PHP development to build an account management portal for our new Premium service. This had to tie in to our exiting web APIs (which I'll admit were a little cobbled together) and be backwards compatible with our existing database. And it had to be done yesterday.<!--more--></p>
+<p>We got a great tip to try <a href="http://laravel.com/">Laravel</a>, a framework for building database-driven sites using PHP. Key among the features that attracted us was the Eloquent ORM for managing database models, blade templating and integration with Composer for dependency management.</p>
+<p>Being a hip and trendy start up type operation, we all develop on Macs. So I needed a neat tool for running a web server with PHP and MySQL on OS X. I've been using <a href="http://www.mamp.info/en/index.html">MAMP</a> for this purpose for a few years now, which provides a full Apache/MySQL/PHP stack, the Pro version of which gives me a heap of tools for configuring multiple sites (including automatic management of my hosts file).</p>
+<p>The trick is to get the two working together, which can be a little tricky, primarily due to one of Laravel's strengths, it's integration with Composer. This post is intended as a guide for getting a Laravel site up and running on MAMP.</p>
+<p>These instructions assume you already have MAMP up and running and know how to set up a site.</p>
+<p>There are a few little pitfalls when installing. First of all, it's important to make sure you're using the same PHP on the command line as in MAMP.</p>
+<h1>1. Set PATH for PHP</h1>
+<p>Find out where your PHP executable is located:</p>
+<pre>which php</pre>
+<p>Check this is the most recent version and under /Applications/MAMP</p>
+<p>Add this path to ~/.bash_profile</p>
+<pre>export PATH=/Applications/MAMP/bin/php/php5.x.x/bin:$PATH</pre>
+<p>If you wish to use PHPUnit, you should also modify your php.ini for MAMP as listed on this Stackoverflow question:<a href="http://stackoverflow.com/questions/7458644/phpunit-does-nothing-no-errors-no-output"> http://stackoverflow.com/questions/7458644/phpunit-does-nothing-no-errors-no-output</a></p>
+<h1>2. Configure Composer</h1>
+<p>Next comes the installation of <a href="http://getcomposer.org/">Composer</a>. Luckily, this is fairly straightforward using a Terminal, if you know the right commands.</p>
+<p>First, we need to download and run the Composer installer. Change into your desired working directory (we'll move the download later) and execute:</p>
+<pre>curl -s  <a href="http://getcomposer.org/installer" rel="nofollow">http://getcomposer.org/installer</a> | php</pre>
+<p>This creates composer.phar, which you can run from your working directory as follows:</p>
+<pre>php composer.phar</pre>
+<p>To make it a bit easier to run, let's move composer.phar and set up an alias:</p>
+<pre>sudo mv composer.phar /usr/bin/
+vim ~/.bash_profile</pre>
+<p>Where vim is your favourite editor. Add the below line to your bash profile:</p>
+<pre>alias composer="php /usr/bin/composer.phar"</pre>
+<p>If you re-open Terminal, you can run Composer quite simply:</p>
+<pre>composer</pre>
+<h1>3. Install Laravel using Composer</h1>
+<p>With Composer installed, you can quickly install a Laravel instance using the following command at a terminal:</p>
+<pre><code>composer create-project laravel/laravel your-project-name --prefer-dist</code></pre>
+<p>This will create a full project with the given name in the working directory.</p>
+<h1>4. Configure your Laravel site in MAMP</h1>
+<p>To configure a Laravel site in MAMP, you just need to point the root of the site to the <em>public</em> directory of your Laravel project. This step will vary depending on whether you have MAMP or MAMP Pro running.</p>
+<p>You will also need to configure write permissions under <em>app/storage</em>.</p>
+<h1>4. Continue with Quick Start</h1>
+<p>From now on you're all set. You can now continue with the <a href="http://laravel.com/docs/quick">Laravel Quick Start</a> instructions. Or, if you're a seasoned Laravel pro, continue as you see fit.</p>

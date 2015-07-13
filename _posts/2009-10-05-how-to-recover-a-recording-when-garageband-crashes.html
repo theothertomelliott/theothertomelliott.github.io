@@ -1,0 +1,45 @@
+---
+layout: post
+title: 'How To: Recover a Recording When Garageband Crashes'
+date: 2009-10-05 22:39:42.000000000 -04:00
+categories:
+- Tech
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _wp_old_slug: how-to:-recover-a-recording-when-garageband-crashes
+  dsq_thread_id: ''
+  _edit_last: '1'
+  tc-thumb-fld: a:2:{s:9:"_thumb_id";b:0;s:11:"_thumb_type";s:10:"attachment";}
+author:
+  login: Tom
+  email: tom.w.elliott@gmail.com
+  display_name: Tom
+  first_name: ''
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Docoptions: {}
+
+---
+<p><strong>I was recording a podcast last night on my Macbook, we were about an hour in and shock horror! Garageband froze! Visions of losing all the witty banter haunted me like a nightmare about being naked in school. But luckily, I was able to get it all back in moments, and hopefully this tip might help someone else save their work too.</strong></p>
+<p>There we were, nattering away, doing our best to be funny (more on the results later), when Alex suddenly noticed that the counter on Garageband had stopped running. Wiggling the mouse about, the spinny beachball reared its ugly head and we figured now was a good time to take a break to let it settle down.</p>
+<p>About 30 minutes later, we figured there was no choice but to kill it. After we checked the size of the project file (about 550MB), we figured enough had been written that we wouldn't be losing much. So, after some serious "Force Quit" action, we re-opened Garageband, only to see this:</p>
+<p class="rtecenter"><img src="/assets/emptygarageband.png" alt="" width="500" height="215" align="middle" hspace="5" vspace="5" /></p>
+<p class="rteleft">There was nothing there! We double checked the file size and it was still around half a gig. So while we were somewhat worried that we might have to remember and repeat the evening's spontaneity, we were reassured that somewhere in there, the recording was waiting for us to find.</p>
+<p class="rteleft">After a little fiddling, we figured out that all we needed to do was look inside the project package by command-clicking on the file and selecting <em>"Show Package Contents":</em></p>
+<p class="rtecenter"><img src="/assets/showpackage.png" alt="" width="300" height="277" hspace="5" vspace="5" /></p>
+<p class="rteleft">This opened the project as a handy folder. And lo and behold! Tucked away within the <em>Media</em> folder was an audio file containing the whole recording. Even the bits after we thought it had stopped!</p>
+<p class="rtecenter"><img src="/assets/mediafolder.png" alt="" width="500" height="284" hspace="5" vspace="5" /></p>
+<p class="rteleft">So all we had to do was take a copy of this <em>.aif</em> file and re-import it into Garageband, then we were back in business!</p>
+<p class="rteleft"><strong>Instructions in Brief</strong></p>
+<p class="rteleft">So, in summary:</p>
+<ol>
+<li>Command-click the problem Garageband Project and select <em>"Show Package Contents"</em></li>
+<li>In the window showing the package contents, open the <em>Media</em> folder</li>
+<li>Copy any <em>.aif</em> files out of the package and put them somewhere safe</li>
+<li>Import the <em>.aif</em> files into a new Garageband Project</li>
+</ol>
+<p>This tip is for Garageband '09, but may work just as well for earlier or later versions, although the location of the audio files may vary.</p>
+<p><strong>Update:</strong> Thanks to Prisca, I can confirm this works on Garageband '11.</p>
+<p>So there we go! Hope this is of help to those of you with broken recordings. Stay tuned for details of the podcast we recorded last night, it was the first, experimental edition of what we hope will become a weekly extravaganza of laughs, anecdotes and general oddness. See you soon!</p>

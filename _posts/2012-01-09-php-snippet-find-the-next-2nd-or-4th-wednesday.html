@@ -1,0 +1,75 @@
+---
+layout: post
+title: 'PHP Snippet: Find the next 2nd or 4th Wednesday'
+date: 2012-01-09 18:20:31.000000000 -05:00
+categories:
+- Coding
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  dsq_thread_id: '532894670'
+  tc-thumb-fld: a:2:{s:9:"_thumb_id";i:852;s:11:"_thumb_type";s:10:"attachment";}
+author:
+  login: Tom
+  email: tom.w.elliott@gmail.com
+  display_name: Tom
+  first_name: ''
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Docoptions: {}
+
+---
+<p><strong><a href="/assets/php-med-trans.png"><img class="size-full wp-image-852 alignleft" style="border-image: initial; border: 0px initial initial;" title="php-med-trans" src="/assets/php-med-trans.png" alt="" width="95" height="51" /></a>I've recently taken on the job of running the <a href="http://phoenixspeakers.co.uk/">Phoenix Speakers</a> website, so it's high time I brushed up on my PHP. First little job: automating the "Next Meeting" box.</strong></p>
+<p>Phoenix meets on the 2nd and 4th Wednesday of each month. So we'd get something like the following mapping (dates in the form Y-m-d):</p>
+<p>nextMeeting("2011-01-08") =&gt; "2011-01-11"</p>
+<p>nextMeeting("2011-01-12") =&gt; "2011-01-25"</p>
+<p>nextMeeting("2011-01-26") =&gt; "2011-02-08"</p>
+<p>Determining the next meeting wouldn't be as simple as finding the next Wednesday (or two), or moving a set number of weeks from the last meeting - both of which would be easily achieved with the <a href="http://php.net/manual/en/datetime.modify.php">DateTime::modify</a> function. This problem called for something a little more algorithmy!<!--more--></p>
+<p>Breaking the problem down a little, the first job was to find the 2nd and 4th Wednesday for the current month. Then we compare these candidates against today's date, if neither of these were in the future, we would need to repeat the process for next month.</p>
+<p>Extending the function to be a bit more generic, I came up with the below:</p>
+<pre class="prettyprint lang-php">
+/*
+* Determine the date of the meeting after $currentDate
+* Tests a set of possible dates from the start of the month of
+* $currentDate.
+*
+* $numbers is an array of the ordinals for $day to test.
+* $currentDate is a DateTime object
+*
+* E.g.: $numbers = array(2,4) and $day = "Wednesday" would test the
+* 2nd and 4th Wednesdays of the month of $currentDate
+*/
+function getNextMeeting($numbers, $day, $currentDate=0){
+    if($currentDate == 0){
+        $currentDate = new DateTime();
+        // Only take into account the day
+        $currentDate = new DateTime($currentDate->format("Y-m-d"));
+    }
+    // Start searching from first day of this month
+    $start = new DateTime($currentDate->format("Y-m-01"));
+
+    while(true){
+        foreach($numbers as &$n){
+            // Get the date with ordinal $num from the start of the month
+            $candidate = clone $start;
+            $candidate->modify("next " . $day . " + " . ($n-1) . " week");
+            if($candidate >= $currentDate){
+                // This is the next meeting date, return
+                return $candidate;
+            }
+        }
+        // Move to the next month
+        $start->modify("+1 month");
+    }
+}</pre>
+<p>Hope someone with a similar problem might find this useful. If anyone can think of a neater way to do this, please let me know! My PHP's a little rusty and I'm generally a humble kinda guy, if I do say so myself.</p>
+<p><strong>Update (12/02/2012):</strong> Thanks to some eagle-eyed browsing by <a href="http://andrewpmsmith.tumblr.com/">Andy</a>, it turns out there's a bug in the original code, which resulted in the wrong date being shown on the actual day of a meeting. After considering adding a meeting time to the options, I decided it would be simpler to ignore the time altogether. So I've added the line below:</p>
+<pre class="prettyprint lang-php">// Only take into account the day
+$currentDate = new DateTime($currentDate->format("Y-m-d"));</pre>
+<p>This removes the time from the current date entirely, so all dates will be treated as midnight for comparison. I've added it to the full example above as well.</p>
+<p><strong>Update (08/03/2012): </strong>Found another bug! The algorithm was checking from the day before the first day of this month, which was fine, until the first day of the month was a Thursday. I've modified the line in question as below:</p>
+<pre class="prettyprint lang-php">// Start searching from first day of this month
+$start = new DateTime($currentDate->format("Y-m-01"));</pre>
+<p>To be absolutely sure, I've manually checked all the dates this puts out until 2016. This just goes to show how important thorough testing can be!</p>

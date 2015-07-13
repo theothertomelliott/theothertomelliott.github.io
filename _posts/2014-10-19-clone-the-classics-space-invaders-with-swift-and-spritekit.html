@@ -1,0 +1,39 @@
+---
+layout: post
+title: Clone the Classics - Space Invaders with Swift and SpriteKit
+date: 2014-10-19 03:31:55.000000000 -04:00
+categories:
+- Coding
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  dsq_thread_id: '3132674962'
+  tc-thumb-fld: a:2:{s:9:"_thumb_id";i:1101;s:11:"_thumb_type";s:10:"attachment";}
+author:
+  login: Tom
+  email: tom.w.elliott@gmail.com
+  display_name: Tom
+  first_name: ''
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Docoptions: {}
+
+---
+<p>Following on the heels of <a href="http://www.theothertomelliott.com/node/1071">Asteroids with Sprite Kit</a>, the introduction of the <a href="https://developer.apple.com/swift/">Swift</a> language made me feel like another crack at the whip. So here's my take on Space Invaders. This time, I went for OS X as a platform, again using SpriteKit, but this time using Swift as the primary language.</p>
+<p><img class="aligncenter wp-image-1101" src="/assets/SKInvadersScreenshot.png" alt="SpriteKit Space Invaders" width="600" height="456" /></p>
+<p>&nbsp;</p>
+<p><!--more-->One thing from my Asteroids app I wasn't entirely happy with were the simple graphics, relying on SKShapeNode to approximate the vector-based ship and titular Asteroids. With Space Invaders, vectors weren't really an option, so this time, I got serious about my graphical assets.</p>
+<p>I got hold of a nice font for scores and the like from <a href="http://www.fonts2u.com/space-invaders-regular.font">Fonts2U</a>, and a second font that provided a near-complete set of authentic-looking sprites from <a href="http://fontvir.us/fonts/invadersfromspace">fontvir.us</a>.</p>
+<h2>What's missing</h2>
+<p>I'm not quite done yet! Most noticeably, there is currently no sound, and no two player mode (but I left the second player score in there for the aesthetics). I also need to add missile animations and tweak sizes and speeds to better match the original.</p>
+<h2>Thoughts on Swift</h2>
+<p>As a first impression, I love Swift as a language. It's got a really nice balance between the learning curve and the power available to a developer. Developing using Swift has certainly been a lot quicker than Objective-C.</p>
+<p>I was working on this project through a few of the XCode betas prior to the official release of Swift, and a lot changed under me while I worked. Every time for the better, clearing up some annoyances or taking away the need for the odd hack I'd resorted to.</p>
+<p>However, I'm not sure how quickly Swift might supplant Objective-C as the primary language in anyone's toolbox. The big hurdle may well be OSX support. iOS updates have a great track record for user adoption, but historically, OSX upgrades haven't happened so quickly - although Mavericks greatly improved these rates. You can only build Swift apps for the last two versions: OSX 10.9 and up, and iOS 7 and up, so time will tell if the free Yosemite upgrade makes Swift development viable.</p>
+<p>While you can use Objective-C libraries in Swift, there are a few places where the abstraction isn't clear or breaks down (handling #defines for example), so there's a little bit of fiddling to cross the barrier. Besides which, <a href="http://cocoapods.org/">CocoaPods</a> - an awesome dependency manager for XCode projects - shows no signs of supporting Swift any time soon.</p>
+<p>For the time being, I'm going to take a hybrid approach, using Objective-C for some libraries, and Swift for the main UI. Hopefully I'll be able to go fully Swift soon.</p>
+<h2>Source</h2>
+<p>Want to play around with my code? Feel free! You can check out the full source below:</p>
+<h2><a href="https://github.com/theothertomelliott/SpriteKitInvaders">[Source on GitHub]</a></h2>

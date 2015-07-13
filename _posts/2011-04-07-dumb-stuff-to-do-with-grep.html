@@ -1,0 +1,37 @@
+---
+layout: post
+title: Dumb Stuff to Do With Grep
+date: 2011-04-07 15:14:37.000000000 -04:00
+categories:
+- Tech
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  dsq_thread_id: '273608086'
+  tc-thumb-fld: a:2:{s:9:"_thumb_id";b:0;s:11:"_thumb_type";s:10:"attachment";}
+author:
+  login: Tom
+  email: tom.w.elliott@gmail.com
+  display_name: Tom
+  first_name: ''
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Docoptions: {}
+
+---
+<p><a title="Get less dumber by theothertomelliott, on Flickr" href="http://www.flickr.com/photos/45535721@N05/5597509899/"><img style="width: 240px; height: 191px; margin: 5px; float: right;" src="/assets/5597509899_a9e2a2fbcf_m.jpg" alt="Get less dumber" /></a><strong>Sometimes, all it takes is a little command-line snafu to bring a programmer's faith in himself crashing to the ground like an airliner suffering metal fatigue.</strong></p>
+<p>Today at work, I've been engaging in the wonderfully mechanical task of updating some open source libraries we use in the product. All I had to do was find which build files referenced the jars, and bump the numbers to whatever maven had in the online repos.</p>
+<p>Easy, I thought, just a quick grep for the package name. I'll be done before lunch. Thinking I was being dead clever, I redirected the output to a textfile I could tail and further search at my leisure. So I tapped out the following:</p>
+<pre>grep -r "com.somedude.a.library" * &gt; refs.txt</pre>
+<p>And waited for it to return, while I went off and did a few other bits and pieces (many of which involved Facebook). There are no points if you've already guessed what happened next.<!--more--></p>
+<p>An hour later, it was still running. I figured it was just down to the size of our source tree and continued to wait. Then everything on my computer ground to a halt and my viewing of a <a href="http://www.ted.com/talks/morgan_spurlock_the_greatest_ted_talk_ever_sold.html">rather interesting TED talk</a> was interrupted by Chrome complaining that the plugin had crashed, then going all <a href="http://www.geeky-gadgets.com/geeky-clothing-aw-snap-google-crome-t-shirt/">"Aw, snap!"</a> on me.</p>
+<p>I went over to where my file was happily growing and saw that it had been gorging to a morbidly obese <strong>FIFTY GIG</strong>. Killing the call to grep (and indeed the whole console), I took a peek inside the file, which consisted primarily of lines and lines of:</p>
+<pre>refs.txt: com.somedude.a.library
+refs.txt: com.somedude.a.library refs.txt: com.somedude.a.library
+refs.txt: com.somedude.a.library refs.txt: com.somedude.a.library refs.txt: com.somedude.a.library
+refs.txt: com.somedude.a.library refs.txt: com.somedude.a.library refs.txt: com.somedude.a.library refs.txt: com.somedude.a.library
+refs.txt: com.somedude.a.library refs.txt: com.somedude.a.library refs.txt: com.somedude.a.library refs.txt: com.somedude.a.library refs.txt: com.somedude.a.library</pre>
+<p>So my tip for today is:</p>
+<p><strong>Don't redirect grep output into the folder you're grepping!</strong></p>

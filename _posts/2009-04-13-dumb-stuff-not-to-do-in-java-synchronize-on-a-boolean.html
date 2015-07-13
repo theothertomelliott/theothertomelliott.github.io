@@ -1,0 +1,65 @@
+---
+layout: post
+title: 'Dumb Stuff Not to do in Java: Synchronize on a Boolean'
+date: 2009-04-13 16:00:47.000000000 -04:00
+categories:
+- Coding
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  dsq_thread_id: ''
+  _edit_last: '1'
+  _wp_old_slug: dumb-stuff-not-to-do-in-java:-synchronize-on-a-boolean
+  tc-thumb-fld: a:2:{s:9:"_thumb_id";b:0;s:11:"_thumb_type";s:10:"attachment";}
+author:
+  login: Tom
+  email: tom.w.elliott@gmail.com
+  display_name: Tom
+  first_name: ''
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Docoptions: {}
+
+---
+<p class="rteleft">One of the great things about coding is that there're always something new to learn: new techniques, new languages, and possibly most amusing of all, thousands of new ways to screw things up.</p>
+<p class="rteleft">As a case in point, the other day, I wrote some code that synchronized on a Boolean variable, put out a code review (very useful practice - see <a href="http://www.joelonsoftware.com/articles/fog0000000043.html">The Joel Test</a>), and within a few minutes, a colleague replied with the blunt, but informative <em>"NO! You can't synchronize on a Boolean"</em>. Being an inquisitive sort, I enquired as to why, did some reading around, and messed with the code to break it.</p>
+<p class="rteleft">Here's an example to illustrate why:</p>
+<pre>private Boolean isOn = false;
+private String statusMessage = "I'm off";
+public void doSomeStuffAndToggleTheThing(){
+
+   // Do some stuff
+
+   synchronized(isOn){
+      if(!isOn){
+         isOn = true;
+         statusMessage = "I'm on";
+
+         // Do everything else to turn the thing on
+
+      } else {
+         isOn = false;
+         statusMessage = "I'm off";
+
+         // Do everything else to turn the thing off
+
+      }
+   }
+}</pre>
+<p class="rteleft">So we have a thing that can be on or off. Our method will do a bit of work we don't mind being run in parallel, then toggle our "thing" on or off depending on it's current state. This will involve modifying several attributes of our class so we need to make sure this is atomic, which we do by synchronizing. We could synchronize the whole method, but we thought we'd be clever and only synchronize the key block where attributes change.</p>
+<p class="rteleft">Admittedly, this is a massively contrived example, but you get the general idea.</p>
+<p class="rteleft"><strong>Why This is Dumb</strong></p>
+<p class="rteleft">Thanks to the magic of autoboxing, you're perfectly entitled to assign "true" to a Boolean object. However, the assignment <strong><em>isOn = true</em></strong> effectively points the reference <em>isOn </em>to a pre-created Boolean object representing a true value. This means that <em>isOn</em> is no longer the same object as it is when it was false.</p>
+<p class="rteleft">Let's say we had two threads, <strong>T1</strong> and <strong>T2</strong>. They both call <em>doSomeStuffAndToggleTheThing</em> at roughly the same time. <strong>T1</strong> reaches the synchronize statement first and acquires a lock on <em>isOn</em>, which is currently false. <strong>T1</strong> sets <em>isOn=true</em> and at this point, <strong>T2 </strong>reaches the synchronize statement, and can get a lock on <em>isOn</em> because it's now a completely different than the one on which <strong>T1</strong> has a lock. So both threads are in the synchronized block at the same time, race to change our various attributes and leave the class in an inconsistent state.</p>
+<p class="rteleft"><strong>Fixing it</strong></p>
+<p class="rteleft">There are loads of ways you could fix this:</p>
+<ul>
+<li>Synchronize on <em>this</em></li>
+<li>Synchronize on a <strong>private final</strong> Object specifically designated for the purpose (neater if someone else might extend our class)</li>
+<li>Replace <em>isOn</em> with a <strong>final</strong> <em><a href="http://docs.oracle.com/javase/1.5.0/docs/api/java/util/concurrent/atomic/AtomicBoolean.html">AtomicBoolean</a> </em>that you can alter using get and set methods rather than assignments (you'll still need to synchronize for testing the state)</li>
+<li>Redesign the class to avoid this sort of faffing about (such as using constant message Strings for each state)</li>
+</ul>
+<p class="rteleft">This is a fairly subtle consequence of the Java abstraction, and could have caused me a huge headache if it had gone unchecked - leaving one of those wonderfully annoying intermittent bugs floating around (the kind that take forever to track down and debug). So I figured it would be more than worth writing about, in the hope I might save someone else this trouble.</p>
+<p class="rteleft">Bottom line: <strong>Don't synchronize on references that might change.</strong></p>
+<p class="rteleft"><strong>Update (08/12/2011):</strong> Huge thanks to everyone that commented pointing out what was wrong with my original post. Hopefully I've cleared up those niggles.</p>

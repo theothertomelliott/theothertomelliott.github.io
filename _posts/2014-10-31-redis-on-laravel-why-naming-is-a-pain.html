@@ -1,0 +1,43 @@
+---
+layout: post
+title: 'Redis on Laravel: Why naming is a pain'
+date: 2014-10-31 03:08:29.000000000 -04:00
+categories:
+- Coding
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  _oembed_590b0ab742cea57455f092e56d2a8707: '{{unknown}}'
+  dsq_thread_id: '3174944934'
+  tc-thumb-fld: a:2:{s:9:"_thumb_id";i:1113;s:11:"_thumb_type";s:10:"attachment";}
+author:
+  login: Tom
+  email: tom.w.elliott@gmail.com
+  display_name: Tom
+  first_name: ''
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Docoptions: {}
+
+---
+<p><a href="/assets/Screen-Shot-2014-10-30-at-22.44.50.png"><img class="alignright wp-image-1113" src="/assets/Screen-Shot-2014-10-30-at-22.44.50.png" alt="Screen Shot 2014-10-30 at 22.44.50" width="300" height="148" /></a>It's Thursday night, and you're looking to start using Redis in your Laravel application. You fire up your <a href="http://laravel.com/docs/4.2/homestead">Homestead</a> box (more on this in another post), open your favourite IDE and put in a new route to start playing around. Just something simple to start, write then read a value, just like the <a href="http://laravel.com/docs/4.2/redis#usage">example</a>.</p>
+<p>You save, and load up the route in your browser, only to see:</p>
+<pre>Call to undefined method Redis::connection()</pre>
+<p>That can't be right, can it? The Redis class is built-in to Laravel, and connection() was in the example. How can it be missing?</p>
+<p><!--more--></p>
+<p>As it turns out, <em>Redis</em> is a popular name for Redis classes, so <a href="https://github.com/laravel/framework/issues/1066">there may be a conflict</a> between Laravel's Redis alias and another Redis class. In my case (and most likely), the Redis PHP extension provided by the <em>php-redis</em> package. Are you sick of me saying Redis yet?</p>
+<p>The solution is nice and simple, you just need to edit your app config, open <em>app/config/app.php</em> and replace this line:</p>
+<pre>'Redis' => 'Illuminate\Support\Facades\Redis',</pre>
+<p>with</p>
+<pre>'LaravelRedis' => 'Illuminate\Support\Facades\Redis',</pre>
+<p>Then you can get your Redis instance like this:</p>
+<pre>$redis = LaravelRedis::connection();</pre>
+<p>Quick and straightforward to solve, after an absolute nightmare to diagnose.</p>
+<p>Important lesson learned today: it's probably not a good idea to use someone else's product name as your class name, especially if that class isn't distinguished by a package.</p>
+<h2>Caveat - third party Composer packages</h2>
+<p>There is probably a good reason that Laravel is still using 'Redis' as the default Redis alias - Composer packages. If you use a third party package that makes use of Redis with the default, you're screwed. In which case, you may want to remove the PHP Redis package entirely.</p>
+<p>For example, on Ubuntu:</p>
+<pre class="p1">apt-get remove php5-redis</pre>
+<p>Don't forget to restart your PHP service as required.</p>

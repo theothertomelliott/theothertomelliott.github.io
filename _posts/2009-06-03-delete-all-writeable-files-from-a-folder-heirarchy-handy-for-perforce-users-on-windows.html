@@ -1,0 +1,31 @@
+---
+layout: post
+title: Delete all writeable files from a folder heirarchy - Handy for Perforce users on Windows
+date: 2009-06-03 13:54:50.000000000 -04:00
+categories:
+- Coding
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  dsq_thread_id: '261935518'
+  _wp_old_slug: delete-all-writeable-files-from-a-folder-heirarchy---handy-for-perforce-users-on-windows
+  _edit_last: '1'
+  tc-thumb-fld: a:2:{s:9:"_thumb_id";b:0;s:11:"_thumb_type";s:10:"attachment";}
+author:
+  login: Tom
+  email: tom.w.elliott@gmail.com
+  display_name: Tom
+  first_name: ''
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Docoptions: {}
+
+---
+<p><img src="/assets/windows_logo.jpg" alt="" width="199" height="145" align="right" hspace="5" vspace="5" />Despite being a huge Mac fanboy (see the keyboard &amp; mouse combo in the header pic), I use a PC running Windows XP at work. As such, I'm pretty used to bash-esque shells, and am continually frustrated by the Windows command-line being just that little bit different.</p>
+<p>My build tree has been broken for a couple of days, and in the hope of saving it, I wanted to get rid of all the files that weren't part of version control. We use Perforce for version control, which handily makes all the files it manages read-only (requiring you to explicitly check them out to work on them). So all I needed to to was delete all the writable files in my source tree.</p>
+<p>If I were on my Mac or a Linux machine, I might do some complex series of piped commands in a crazily complex script...before discovering a specific command that could do what I wanted. Being on Windows, I had to read up on the syntax for the del command.</p>
+<p>Hooray! All I needed to do was:</p>
+<p><strong>del /Q /S /A-r *</strong></p>
+<p>Bingo!</p>
+<p>This is probably quite obvious to any Windows peeps who use the command-line a lot. But heck, if I write about it here, I might remember the command next time.</p>

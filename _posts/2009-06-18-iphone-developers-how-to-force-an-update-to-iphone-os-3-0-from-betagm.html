@@ -1,0 +1,41 @@
+---
+layout: post
+title: 'iPhone Developers: How to Force an Update to iPhone OS 3.0 from Beta/GM'
+date: 2009-06-18 10:53:14.000000000 -04:00
+categories:
+- Tech
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  dsq_thread_id: ''
+  tc-thumb-fld: a:2:{s:9:"_thumb_id";b:0;s:11:"_thumb_type";s:10:"attachment";}
+  _wp_old_slug: iphone-developers:-how-to-force-an-update-to-iphone-os-3-0-from-beta/gm
+  _edit_last: '1'
+author:
+  login: Tom
+  email: tom.w.elliott@gmail.com
+  display_name: Tom
+  first_name: ''
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Docoptions: {}
+
+---
+<p>&nbsp;<strong><img width="146" height="99" vspace="5" hspace="5" align="right" alt="" src="/assets/os30(1).jpg" />Yesterday saw the release of iPhone OS 3.0, with a raft of <a href="http://www.apple.com/iphone/softwareupdate/">improvements and new features</a>. Excitement was such that a </strong><a href="http://www.gearlive.com/news/article/q209-apple-delays-iphone-3.0-by-a-day/"><strong>misreported delay</strong></a><strong> in the release resulted in a flurry of angry tweets, followed by a series of slightly miffed corrections. Despite this, the release went ahead as planned, for most people.</strong></p>
+<p>iPhone developers had been given beta versions of the OS, so they could test their apps and make use of new features from day one. As a developer, I had been working with the betas, and was keen to install the release version for any bug fixes that went in, and to be sure apps on my device would work the same as for everyone else.</p>
+<p>However, upon trying to update through iTunes, I was presented with a dialog telling me that &quot;3.0 was the latest version&quot;, as far as it was concerned, 3.0 beta 5 was the same as the final release. Not only that, but Apple had removed the GM seed download from the developer site.</p>
+<p>Luckily, there was help available in the <a href="https://devforums.apple.com/message/84039#84039">developer forums</a>. I've condensed these tips below:</p>
+<p><strong>Instructions</strong></p>
+<ol>
+<li><strong>IMPORTANT! </strong>Sync your iPhone in iTunes, to make sure you have all your settings backed up. You will be wiping your phone later, so make sure you have all your media and applications in your iTunes library, too (I forgot to do this and lost a day's notes and text messages!)</li>
+<li>Unplug the USB&nbsp;connector from your iPhone and power it off (with the red slider).</li>
+<li>Make sure iTunes is open on your Mac. Hold down the Home button on your iPhone and reconnect the USB&nbsp;connector.</li>
+<li>Keep the Home button held down until you see the &quot;Connect to iTunes&quot; screen on your iPhone</li>
+<li>iTunes will bring up a dialog:&nbsp;&quot;iTunes has detected an iPhone in recovery mode&quot;. Click OK to start the recovery process. iTunes will download and install the latest version of iPhone OS.</li>
+<li>Once your iPhone has been recovered, select your backup to restore your settings</li>
+<li>Sync your iPhone to restore all your applications and media</li>
+</ol>
+<p>And you're ready to go! For more detailed instructions for steps 2-5, see this <a href="http://support.apple.com/kb/HT1808">support article</a>.</p>
+<p><em>This seemed to work great for everyone in the forums, but I should add a disclaimer that you do this at your own risk, and I'm not responsible for any lost data, etc.</em></p>
+<p>Now I can get back to work on version 1.1 of <a href="http://www.theothertomelliott.com/togolon">Togolon</a>!</p>

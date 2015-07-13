@@ -1,0 +1,52 @@
+---
+layout: post
+title: 'iOS Shooter Project Part 5: Choosing APIs'
+date: 2012-03-06 22:18:34.000000000 -05:00
+categories:
+- Coding
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  dsq_thread_id: '601261662'
+  _edit_last: '1'
+  tc-thumb-fld: a:2:{s:9:"_thumb_id";b:0;s:11:"_thumb_type";s:10:"attachment";}
+author:
+  login: Tom
+  email: tom.w.elliott@gmail.com
+  display_name: Tom
+  first_name: ''
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Docoptions: {}
+
+---
+<p><a href="/assets/postimage.png"><img class="alignright size-medium wp-image-474" title="postimage" src="/assets/postimage-300x238.png" alt="" width="300" height="238" /></a><strong>As great as the iPhone SDK is, it wasn't designed specifically for games, so a mini industry has sprung up to provide game developers with APIs and tools to make their lives easier. So I'm going to raid the repositories and see what I can use for my project.</strong></p>
+<p>Admittedly, it's been a while since my last iOS Shooter post. Hopefully I'll soon be able to explain all the exciting things I've been doing of late, but for now, here's the next step in my game planning: API selection.</p>
+<p>While using third-party APIs isn't necessary by any stretch of the imagination (thanks, Mr. Turing!), there are a lot of common problems and tasks that they can simplify greatly. Animating sprites, for example, can be incredibly tedious to code directly with OpenGL. Not only that, but - as I discovered when writing Togolon - physics is hard! Given I want this to be a short project, I'll take any short cuts I can.</p>
+<p><!--more-->When it boils down to it, game APIs for mobile platforms fall into one of two categories:</p>
+<ul>
+<li>Animation &amp; sound</li>
+<li>Social</li>
+</ul>
+<div>The first category is pretty broad, and includes graphics, physics, audio and even user interaction (accelerometer, etc). These tend to be traditional "jack-of-all-trades" toolkits that try to provide everything a typical game would need. The "Social" category is something newer for the 3G generation: providing online high score tables, achievements, and all the bits that get people coming back for more!</div>
+<p><strong>Animation/Sound/Etc.</strong></p>
+<p>There are a lot of "all-in-one" game APIs for iOS out there, each with their own strengths, weaknesses and licensing restrictions. So before I go into details on any particular projects, I whittled down the field based on two criteria:</p>
+<ul>
+<li>Aimed at 2D animation</li>
+<li>Free</li>
+</ul>
+<p>Of the "all-in-one" game APIs, probably the most well known is <strong><a href="http://www.cocos2d-iphone.org/">Cocos2D</a></strong>, which I've had a bit of a play with before. It boasts a hefty feature list (I'm sure I can do something with lens flare!) and a sizeable community to offer support.</p>
+<p><a href="http://code.google.com/p/galaxyengine/">Galaxy Game Engine</a> is shutting down. So enough said about that one.</p>
+<p><a href="http://www.sparrow-framework.org/">Sparrow </a>is based on the concepts of Flash development and like Cocos2D is community supported (although not as widely used). It is intended to be lightweight and easy to use, but as such lacks the weight of features of Cocos2D.</p>
+<p><a href="http://www.kobold2d.com/display/KKSITE/Home">Kobold2d</a> is a little bit of a cheat, being a further API layer on top of Cocos2D. It comes with a neat little installer and support for ARC built in, which is something of a bonus (although other API choices might scupper ARC).</p>
+<p><strong>Social</strong></p>
+<p>There are three major contenders in the Social API arena, each of which offer a largely similar feature set, with a couple of notable exceptions.</p>
+<p><a href="http://www.apple.com/game-center/">Game Center</a> is the Social API built into the iOS SDK. It's gained pretty widespread adoption (for obvious reasons), but is only supported in iOS 4.2+ and is limited to Apple devices, which would limit future porting possibilities. This wouldn't be a big deal for a graphics API, but with social data floating around in the cloud, it would be a pain to fragment users like that.</p>
+<p><a href="http://openfeint.com/">Openfeint</a> is probably the biggest player in mobile social gaming and was certainly one of the first to put out an API. It supports both iOS and Android. It has a massive (and fast growing) user base and offers a lot of tools for promoting games (like free app of the day). However, beyond their marketing spiel I couldn't get a look at specifics, because their login page didn't like my e-mail address and wouldn't let me in!</p>
+<p><a href="http://www.scoreloop.com/">Scoreloop</a> is the social platform I used for Togolon and a lot has changed over the past few years. The feature set is now on a par with Openfeint (including a greater number of supported platforms) and the user base is increasing at a similar rate.</p>
+<p>An interesting feature of Scoreloop is in-depth analytics, which allows for detailed tracking of the use of the app. This does ring some alarm bells with regards to privacy (which will be good fodder for another blog) but according to their privacy policy, the data is only available to the app owner, and is anonymised, which should allay most concerns.</p>
+<p>Most importantly, Scoreloop's developer site allowed me to log in!</p>
+<p><strong>Decisions, Decisions</strong></p>
+<p>Having surveyed my options, the winners are Kobold2d and Scoreloop.</p>
+<p>We'll just have to see if I'm still using them when I (eventually) release the game.</p>

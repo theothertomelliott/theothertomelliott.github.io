@@ -1,0 +1,42 @@
+---
+layout: post
+title: Adaptive vs Responsive Design - A super quick overview
+date: 2015-04-27 01:12:01.000000000 -04:00
+categories:
+- Coding
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  tc-thumb-fld: a:2:{s:9:"_thumb_id";b:0;s:11:"_thumb_type";s:10:"attachment";}
+  _edit_last: '1'
+  layout_key: ''
+  post_slider_check_key: '0'
+  dsq_thread_id: '3715316840'
+author:
+  login: Tom
+  email: tom.w.elliott@gmail.com
+  display_name: Tom
+  first_name: ''
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Docoptions: {}
+
+---
+<p>In this mobile-heavy world, making sure your website works for a variety of different form-factors is of ever-growing importance. Having a central column fixed at 1024 pixels wide just won't cut it any more. Both adaptive and responsive design provide their own solution to this problem, but researching them online can be confusing, since a lot of the descriptions are long-winded, and sometimes use the verb "adapt" when referring to responsive sites and "respond" when referring to adaptive. What's more, adaptive design is often conflated with, or used as a synonym for "Progressive enhancement".</p>
+<p>But it needn't be complicated, the concepts can actually be distilled to a bullet point each:</p>
+<p>* A <strong>responsive</strong> site will have <strong>a single design</strong> that adjusts to fit the screen on which it is displayed.<br />
+* An <strong>adaptive</strong> site will have <strong>many designs</strong>, one of which will be selected for the device being used to view it.</p>
+<p><!--more--></p>
+<h2>Which is better?</h2>
+<p>As with many design/development philosophies, these is no "right" or "best" option between the two camps, although with individual projects, one approach may be better suited than the other. A quick comparison can be made based on two stereotypical team members</p>
+<p>Your engineer may prefer a responsive approach, because a single design will be easier to maintain.</p>
+<p>Your UI or UX designer may prefer an adaptive approach, which would allow for a tailored design and experience for each device.</p>
+<p>That said, the two aren't even mutually exclusive, and it's perfectly reasonable to combine the two as your requirements dictate. Taking a non-web example, <a href="https://developer.apple.com/library/ios/referencelibrary/GettingStarted/RoadMapiOS/SecondTutorial.html">Storyboards</a> in XCode allow a combination of the techniques, with <a href="https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/AutolayoutPG/WorkingwithConstraints/WorkingwithConstraints.html">constraints</a> providing responsive behaviour, and <a href="https://developer.apple.com/library/ios/recipes/xcode_help-IB_adaptive_sizes/chapters/EnablingAdaptiveSizeDesign.html">size classes</a> being adaptive.</p>
+<h2>Some Resources</h2>
+<p>For responsive design, <a href="http://getbootstrap.com/">Bootstrap</a> is a great HTML/CSS framework that provides a fluid layout model. It's been my starting point for pretty much all of my web projects since version 2.3.2.</p>
+<p><a href="http://alistapart.com/article/progressiveenhancementwithcss">Progressive Enhancement with CSS</a> is an older, but interesting article on organizing one's CSS files for a PE approach, which in this case illustrates adaptive design quite effectively.</p>
+<p>This isn't meant to be an exhaustive list, but more of a springboard to trying out the two approaches (or realizing you were doing so already). Please feel free to recommend other resources in the comments!</p>
+<h2>Conclusions</h2>
+<p>There's often a lot of argument about whether responsive or adaptive is the way forward. From my own experience, it seems that responsive design is more in vogue right now, for a number of possible reasons, which I'm not going to dive into here.</p>
+<p>But rather than considering which approach to adopt and which to ignore (or scorn), I think it's better to be able to recognize them when they show up, and make more effective use of the ideas as a result.</p>

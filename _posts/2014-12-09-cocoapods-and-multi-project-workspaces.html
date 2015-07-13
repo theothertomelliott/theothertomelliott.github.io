@@ -1,0 +1,42 @@
+---
+layout: post
+title: Cocoapods and multi-project workspaces
+date: 2014-12-09 04:37:59.000000000 -05:00
+categories:
+- Ramblings
+tags: []
+status: trash
+type: post
+published: false
+meta:
+  _edit_last: '1'
+  _wp_trash_meta_status: draft
+  _wp_trash_meta_time: '1435023847'
+author:
+  login: Tom
+  email: tom.w.elliott@gmail.com
+  display_name: Tom
+  first_name: ''
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Docoptions: {}
+
+---
+<p>Requires a bit of massaging. Tried to fiddle with stuff like:</p>
+<pre>workspace "Spotflux"
+source 'https://github.com/CocoaPods/Specs.git'
+
+# Define a default project here
+xcodeproj 'Spotflux/Spotflux.xcodeproj/'
+
+target "Spotflux" do
+pod 'Typhoon', :head
+end
+
+target "SpotfluxTests" do
+xcodeproj 'WebServices/WebServices.xcodeproj/'
+xcodeproj 'SpotfluxCore/SpotfluxCore.xcodeproj/'
+link_with "WebServicesTests", "SpotfluxCoreTests"
+pod 'OCMock'
+end
+</pre>
+<p>Ended up saying "fuck it" and using local spect</p>

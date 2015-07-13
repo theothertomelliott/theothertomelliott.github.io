@@ -1,0 +1,51 @@
+---
+layout: post
+title: Problems with Pagination of Popular Pages
+date: 2011-11-12 10:48:34.000000000 -05:00
+categories:
+- Coding
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  geo_latitude: '51.459701'
+  geo_longitude: '-0.168130'
+  geo_public: '1'
+  _edit_last: '1'
+  dsq_thread_id: '469548183'
+  tc-thumb-fld: a:2:{s:9:"_thumb_id";i:628;s:11:"_thumb_type";s:10:"attachment";}
+author:
+  login: Tom
+  email: tom.w.elliott@gmail.com
+  display_name: Tom
+  first_name: ''
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Docoptions: {}
+
+---
+<p><a href="/assets/Screen-Shot-2011-11-12-at-11.42.24.png"><img class="alignright size-medium wp-image-628" style="margin: 5px;" title="Screen Shot 2011-11-12 at 11.42.24" src="/assets/Screen-Shot-2011-11-12-at-11.42.24-300x244.png" alt="" width="240" height="195" /></a><strong>I was browsing the latest headlines on the BBC News site this morning, and found myself idly scanning through the comments section. I read through a page of vitriol and ill-informed opinions, then clicked for Page 2 and found...exactly the same comments. I was livid, read the first comment, again. This post is my rant about what went wrong, and how it could be fixed.</strong></p>
+<p>I had a hunch about why this was happening, but took a look at the link for Page 2 to verify my suspicions.<!--more--></p>
+<p><em>http://www.bbc.co.uk/news/uk-politics-15704451?module=comments&amp;controller=index&amp;action=getcomments&amp;siteId=newscommentsmodule&amp;forumId=__CPS__15704451&amp;title=Minister+Francis+Maude+urges+%26%23039%3B15-minute+strike%26%23039%3B&amp;sortOrder=Descending&amp;sortBy=Created&amp;limit=20&amp;comments_page=2&amp;filter=none&amp;preset=opinion&amp;parentUri=http%3A%2F%2Fwww.bbc.co.uk%2Fnews%2Fuk-politics-15704451&amp;loc=en-GB&amp;timezone=Europe%2FLondon&amp;viaAjax=true&amp;cachebuster=1321095415676#dna-comments</em></p>
+<p>Hidden in this chain of attributes was the relatively innocuous <em>comments_page=2</em>, which specified that the page we wanted to look at was the second one.</p>
+<p>Since I don't know the architecture of the BBC News site, I'm going to assume they're using a generic SQL database (so none of the LIMIT goodness of MySQL) and have a query a bit like this:</p>
+<pre>SELECT id, text, poster, votes, created FROM
+   (SELECT id, text, poster, votes, created FROM comments
+      WHERE article = {articleID}
+      ORDER BY {sortBy} {sortOrder} )
+WHERE ROWNUM BETWEEN {start} AND {end};</pre>
+<p>Values for <em>start</em> and <em>end</em> can be determined based on the Page number (provided in the query) and the page size (likely fixed in site config). Using something like the below:</p>
+<pre>  start = pageSize * (pageNumber - 1);
+  end = start + pageSize;</pre>
+<p>The problem here isn't so much a programming error, as a flaw in the specification of the site. When a comments page is served, the pagination links point directly to page n in the <strong>current</strong> list of comments. So while you're reading Page n, people are still busy posting their bile and the comments list is growing. By the time you're finished and move to Page n+1, a pageful of comments have been posted and Page n+1 is the same as your original Page n.</p>
+<p>For most sites, this would all work fine, as comments don't come in fast enough. But for those with popular comments pages, like Good Old Auntie Beeb, the navigation links for pagination need to be tied to your point of entry. Or, to put it another way, once you've navigated to the first comments page, the first comment on each subsequent page must then be fixed, no matter what path you take through the pages, until you navigate away from the comments.</p>
+<p>The brute force way to do this would be to store the complete dataset of comments on the user's session. But that would both waste resources and lose you the respect of your fellow coders.</p>
+<p>A more elegant solution would be to pass the user's initial visit time into every link. So page 2 will know the time you started reading page 1, and won't include any comments posted prior to this. Page 2, and all other pages would also pass the original visit time in their page links. We'll call this <em>startTime</em>. Our query becomes something like:</p>
+<pre>SELECT id, text, poster, votes, created FROM
+   (SELECT id, text, poster, votes, created FROM comments
+      WHERE article = {articleID} AND created &lt; {startTime}
+      ORDER BY {sortBy} {sortOrder} )
+WHERE ROWNUM BETWEEN {start} AND {end};</pre>
+<p>Easy. If the comment id was guaranteed to be sequential, you could alternatively use the id of the most recent comment returned instead of the time. However, this would require pulling it out of the results to build your links. And I'm lazy.</p>
+<p>The disadvantage of this approach is that people sharing the comment URLs would never see any of the newer comments. This could be tackled by using a session attribute or cookie to store the start time (which would have to be carefully managed as the user navigated around). Or, as the BBC have done anyway, by using the links only to update the comments area on the page being displayed. This way, the URL never appears in the address bar.</p>
+<p>This post took me about 40 minutes to write. In that time, over 200 comments were posted on the news article I was reading.</p>

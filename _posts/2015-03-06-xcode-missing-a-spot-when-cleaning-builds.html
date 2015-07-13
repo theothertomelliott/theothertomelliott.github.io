@@ -1,0 +1,32 @@
+---
+layout: post
+title: XCode Missing a Spot when Cleaning Builds
+date: 2015-03-06 21:15:51.000000000 -05:00
+categories:
+- Coding
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  dsq_thread_id: '3573844718'
+  tc-thumb-fld: a:2:{s:9:"_thumb_id";b:0;s:11:"_thumb_type";s:10:"attachment";}
+author:
+  login: Tom
+  email: tom.w.elliott@gmail.com
+  display_name: Tom
+  first_name: ''
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Docoptions: {}
+
+---
+<p>Found myself with something of a head-scratcher today. After pulling some changes from an iOS project, I fired it up in XCode only to get an error:</p>
+<pre>Property &lt;property name&gt; not found on object of type __strong &lt;object type&gt;</pre>
+<p>I carefully scanned the offending line for typos and couldn't see anything amiss. I tried a Clean of the build, seeing the same error on rebuilding. Since the class in question was in a file imported through CocoaPods, I tried rebuilding the Pod project, but still got the same error.</p>
+<p>I wondered if there might be a duplicated name somewhere, so I tried Option+clicking on the protocol name where I found the error. This took me to the header where I expected the property would be missing, but, surprisingly it was right there.</p>
+<p>Apparently, running Clean on the build didn't actually clean everything up.</p>
+<p>After searching around a bit, I came across a <a href="http://stackoverflow.com/questions/5714372/how-to-empty-caches-and-clean-all-targets-xcode-4">StackOverflow post</a> from a few years relating to clearing caches for xibs, so I tried deleting everything under:</p>
+<pre><em>~/Library/Developer/Xcode/DerivedData</em></pre>
+<p>I hit build again, and <strong>bingo! </strong>No more annoying error. Thanks to <a href="http://stackoverflow.com/users/341994/matt">matt</a> for getting me out of an annoying tight spot!</p>
+<p>&nbsp;</p>

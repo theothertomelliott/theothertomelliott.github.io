@@ -1,0 +1,12 @@
+# Site settings
+title: The Other Tom Elliott
+email: tom.w.elliott@gmail.com
+description: > # this means to ignore newlines until "baseurl:"
+  Computer geek, sometime performer, humourist in training and possessor of a common name.
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://telliott.io" # the base hostname & protocol for your site
+twitter_username: theotherelliott
+github_username:  theothertomelliott
+
+# Build settings
+markdown: kramdown

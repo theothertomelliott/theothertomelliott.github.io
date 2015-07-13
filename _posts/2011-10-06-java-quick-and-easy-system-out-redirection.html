@@ -1,0 +1,46 @@
+---
+layout: post
+title: 'Java: Quick and Easy System.out Redirection'
+date: 2011-10-06 13:20:36.000000000 -04:00
+categories:
+- Coding
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  dsq_thread_id: '435770051'
+  tc-thumb-fld: a:2:{s:9:"_thumb_id";b:0;s:11:"_thumb_type";s:10:"attachment";}
+author:
+  login: Tom
+  email: tom.w.elliott@gmail.com
+  display_name: Tom
+  first_name: ''
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Docoptions: {}
+
+---
+<p><a title="Random Computery Photo by theothertomelliott, on Flickr" href="http://www.flickr.com/photos/45535721@N05/5541091044/"><img src="/assets/5541091044_fe598a4a99_m.jpg" alt="Random Computery Photo" width="240" height="179" align="right" border="0" hspace="5" vspace="5" /></a></p>
+<p><strong>I recently found myself in the exciting position of having to put together some unit tests for a Java command-line utility, whose results of course all went straight to System.out. Handily, Java provides some neat functionality to redirect output streams.</strong></p>
+<p>I fiddled around with a few output stream types and hit all sorts of trouble, ranging from pipe streams not being flushed often enough to running out of buffer space to synchronization issues.</p>
+<p>Finally, a <a href="http://stackoverflow.com/questions/216894/get-an-outputstream-into-a-string">Stackoverflow question</a> on exactly this problem pointed me to an elegant and easy solution that I could just drop in. My snippet is below:<!--more--></p>
+<pre>ByteArrayOutputStream pipeOut = new ByteArrayOutputStream();
+
+// Store the current System.out
+PrintStream old_out = System.out;
+
+// Replace redirect output to our stream
+System.setOut(new PrintStream(pipeOut));
+
+// Do stuff
+// ...
+// Done stuff
+
+// Revert back to the old System.out
+System.setOut(old_out);
+
+// Write the output to a handy string
+String output = new String(pipeOut.toByteArray());</pre>
+<p>This is mostly for my own benefit (less Googling if I need to do this again). But heck, if anyone else finds it useful, all the better.</p>
+<p>You probably wouldn't want to use this to redirect vast tomes of logging, but for handling a few lines of text output, it's perfect. Add another couple of lines and you get System.err into the bargain.</p>

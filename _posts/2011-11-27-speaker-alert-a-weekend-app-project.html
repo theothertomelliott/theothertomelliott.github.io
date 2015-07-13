@@ -1,0 +1,70 @@
+---
+layout: post
+title: 'Speaker Alert: A Weekend App Project'
+date: 2011-11-27 22:54:10.000000000 -05:00
+categories:
+- Coding
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  dsq_thread_id: '485744340'
+  tc-thumb-fld: a:2:{s:9:"_thumb_id";i:732;s:11:"_thumb_type";s:10:"attachment";}
+author:
+  login: Tom
+  email: tom.w.elliott@gmail.com
+  display_name: Tom
+  first_name: ''
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Docoptions: {}
+
+---
+<p><strong><strong><a href="/assets/postimage.png"><img class="alignright" title="iOS Development Post" src="/assets/postimage-300x238.png" alt="" width="300" height="238" /></a></strong>Last Wednesday, a friend of mine gave me an idea for a simple timing app. As a prelude to the iOS Shooter project, it seemed like a perfect opportunity to put a quick iOS 5 app together to get a feel for what's new in the latest version. I started on Friday night, here are the results.<!--more--></strong></p>
+<p><strong>The Brief</strong></p>
+<p>Not sure if I've mentioned it on this blog before, but at the start of the year, I joined a <a title="Phoenix Speakers" href="http://phoenixspeakers.co.uk/">Toastmasters Club</a> in Victoria. For those of you that are unfamiliar, Toastmasters is a public speaking organisation, whose clubs meet regularly so their members can work on their speaking skills in a supportive environment. I've had a great time with the club so far, and have learned far more in 9 months of bi-weekly meetings with friends than in 2 years of weekly stand up gigs with indifferent strangers. But my endorsement is beside the point.</p>
+<p>Timekeeping is very important in Toastmasters, and really should be for anyone who does any kind of public speaking. We usually use a system of lights to indicate to a speaker how long they have left: Green means you've hit your minimum time, Amber means you're approaching the maximum time and Red means you've hit the maximum time and need to wrap up.</p>
+<p>We've got our Christmas Dinner coming up, with a few speakers scheduled at various points of the evening. To avoid faffing with a bulky set of lights, Brad, our VPE, suggested that it would be useful to have an iPhone app to give our dinner speakers those handy timing signals.</p>
+<p>Challenge: Accepted.</p>
+<p><strong>The Spec</strong></p>
+<p>A quick brainstorming session on Friday night gave me a key set of features:</p>
+<ul>
+<li>Ascending timer, displaying minutes and seconds</li>
+<li>Visual alerts for Green, Amber and Red times (background colour of timer screen)</li>
+<li>Configurable light timings</li>
+<li>Vibration alerts (1 for Green, 2 for Amber, 3 for Red)</li>
+<li>iOS5, iPhone 4/4S specific - both for quick development and because I'm crashing with a friend and only have a 4S to hand right now</li>
+</ul>
+<p>Having had a peek about the App Store, there are already one or two apps that do this sort of thing (including one specifically aimed at Toastmasters meetings). However, it seems like there's still room for one more out there, and a challenge is a challenge!</p>
+<p><strong>Implementation (or "What's awesome about the latest XCode release")</strong></p>
+<p>I started work in earnest on Friday night, and put together a skeleton of the app as a whole. I started with fixed timings so I could get the important timing elements together. I aimed to follow the MVC model recommended by Apple from the start, beginning with the following classes (beyond the default app delegate and main source file):</p>
+<ul>
+<li>View: Timer View</li>
+<li>Controller: TKViewController (Timer View)</li>
+<li>Model: SpeechTimer</li>
+</ul>
+<p>SpeechTimer was a simple class to control the actual timing, which set up an NSTimer instance to fire off a selector at regular intervals. This selector would calculate the time since the SpeechTimer started. TKOverviewController implemented a protocol to receive updates from SpeechTimer when the time was updated, and for when the light state changed. The controller would update the timer view appropriately upon receiving these events.</p>
+<p>The first awesome addition for iOS5 development is <strong>ARC</strong>(Automatic Reference Counting), which takes away much of the burden of memory management. So I was able to rattle out the first night's code double-quick and didn't have any annoying reference counting bugs to deal with. I'm kind of expecting a big catch in the near future, but for a new iOS5-only project, it was very handy.</p>
+<p>On Saturday I added configurable timings, with the following classes:</p>
+<ul>
+<li>View: Overview and Time Editor</li>
+<li>Controller: TKOverviewController, TKTimePickerController</li>
+<li>Model: SharedConfig</li>
+</ul>
+<p>As a quick and dirty way of sharing configuration between the various views, SharedConfig is a singleton class storing the Green, Amber and Red timings, as well as whether vibrating alerts are enabled. The Overview displays an outline of this configuration, while the Time Editor displays a Picker for choosing a specific time.</p>
+<p>This brings me to awesome thing two: <strong>Storyboards</strong>. This feature extends the visual tools for modifying nibs so you can edit all your Views in one place, and even better, manage transitions, or <em>segues</em> between them.</p>
+<div><a href="/assets/Screen-Shot-2011-11-27-at-22.30.15.png"><img class="aligncenter size-full wp-image-732" title="Storyboarding in XCode" src="/assets/Screen-Shot-2011-11-27-at-22.30.15.png" alt="" width="519" height="618" /></a></div>
+<p>This was another fantastic time saver, letting me set up my complete UI in one go. In theory, I could put all my Views in place without writing any code to try out workflows, etc.</p>
+<p>Sunday evening was spent adding the finishing touches: cleaning up vibration alerts (possibly a topic for a future post), adding validation of config, neatening up the UI, and storing configuration on exit (using a property list for the sake of speed). I took the time to set up new certificates and developer profiles so I could test on my physical phone. I also created a repository on GitHub and checked everything in.</p>
+<p><strong>Source Code</strong></p>
+<p>Full source can be checked out from my GitHub repository <a href="https://github.com/theothertomelliott/Speaker-Alert">[here]</a>.</p>
+<p><strong>Screenshots</strong></p>
+<p>[gallery columns="4"]</p>
+<p><strong>What's Next?</strong></p>
+<p>While I managed to reach "feature complete" - for want of a better term - over the weekend, I'd still like to see the app in action before I call it finished.</p>
+<p>There's also an annoying bug with the vibration feature that prevents in-pocket use. When the lock screen is turned on, the app goes into the background, so you don't get any vibration alerts until you re-open the app, at which point you get them all at once.</p>
+<p>Granted, I could say "don't lock the screen when you put it in your pocket", but that seems wrong from a user experience point-of-view. One, I really don't like the idea of telling someone the "right way" to use an app that's simple enough to be intuitive, and leaving the screen unlocked in your pocket is just asking it to call someone randomly.</p>
+<p>I'm thinking the best option at the moment is to create user notifications for each of the lights, set up for the correct times when the app goes into the background.</p>
+<p>So watch this space, should be an update or two to come. Who knows, I might submit it to the App Store before the week is out!</p>
+<p><strong>UPDATE (03/12/2011)</strong>: I've made a <a href="http://www.theothertomelliott.com/node/746">few improvements</a> ready for Wednesday's meeting.</p>

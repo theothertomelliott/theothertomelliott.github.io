@@ -1,0 +1,96 @@
+---
+layout: post
+title: 'How to: Mount a network drive in Mac OS at startup'
+date: 2011-03-20 21:41:23.000000000 -04:00
+categories:
+- Tech
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  dsq_thread_id: ''
+  tc-thumb-fld: a:2:{s:9:"_thumb_id";b:0;s:11:"_thumb_type";s:10:"attachment";}
+  _edit_last: '1'
+  _wp_old_slug: how-to:-mount-a-network-drive-in-mac-os-at-startup
+author:
+  login: Tom
+  email: tom.w.elliott@gmail.com
+  display_name: Tom
+  first_name: ''
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Docoptions: {}
+
+---
+<p>
+	<strong>One of the neat things about Mac OS is how easy it is to create network shares, and how quick and reliable they are. Once you&#39;ve got the dang things mounted, that is. Therein lies the annoyance, there isn&#39;t a built-in feature for automounting them. Luckily, it&#39;s quite easy to set up with AppleScript.</strong></p>
+<p>
+	Having finally got my Airport Extreme <a href="http://www.theothertomelliott.com/node/224">working</a>, I&#39;ve moved my 2TB <a href="http://www.drobo.com/">Drobo</a> directly onto the network, rather than having to have my Mac Mini running all the time to get at my media.</p>
+<p>
+	I still needed to be able to get to the files from my Mac Mini, and because it was running as a media centre, I couldn&#39;t be doing with fiddling about browsing to the share before I could load my media applications. After a bit of fiddling (and some Googling), I set up an AppleScript to do load the drive on startup. And here&#39;s how you can do it too:</p>
+<p>
+	<strong>1. Get a path to the drive</strong></p>
+<p>
+	If we&#39;re going to load a drive, we need to know where it is. You can do this by mounting it manually, then Command-Clicking the volume on the desktop and selecting &quot;Get Info&quot;.</p>
+<p class="rtecenter">
+	<img alt="" src="/assets/1-getinfo.png" style="width: 250px; height: 320px;" /></p>
+<p>
+	Copy the value for &quot;Server&quot; (shown highlighted), this is the path we&#39;ll need.</p>
+<p>
+	As a side note, I name all my hardware after Scooby Doo characters. The Drobo volume is called Freddy. Unfortunately, this naming convention only allows me to have five pieces of hardware on my network at once. I&#39;ll be damned if I&#39;m calling anything <em>Scrappy</em>.</p>
+<p>
+	<strong>2. Create an AppleScript application to mount the drive</strong></p>
+<p>
+	Load up the <strong>AppleScript Editor</strong> (usually under <em>Applications/Utilities</em>) and enter the following:</p>
+<pre>
+<strong>tell application &quot;Finder&quot;
+&nbsp;&nbsp; &nbsp;try
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; mount volume &quot;&lt;PATH&gt;&quot;
+&nbsp;&nbsp; &nbsp;end try
+end tell</strong>
+</pre>
+<p>
+	Where <em>&lt;PATH&gt;</em> is the path you copied in step 1.</p>
+<p class="rtecenter">
+	<img alt="" src="/assets/2-mountscript.png" style="width: 500px; height: 161px;" /></p>
+<p>
+	So this script will run whenever you double-click it (instead of opening the editor again), be sure to save it as an Application (note the &quot;File Format&quot; option below).</p>
+<p class="rtecenter">
+	<img alt="" src="/assets/3-saveapp.png" style="width: 438px; height: 269px;" /></p>
+<p>
+	So let&#39;s give that a try. Eject your networked Volume and double-click on the script application you&#39;ve just created. The volume should re-appear, as if by magic (if Clarke&#39;s quote is accurate). We&#39;re nearly there!</p>
+<p>
+	<strong>3. Add the script to your Login Items</strong></p>
+<p>
+	Open the <em>Accounts</em> dialog in <em>System Preferences</em>. Select the <strong>Login Items</strong> tab and authorize yourself for changes by clicking the lock icon in the bottom left hand corner. Once you&#39;ve done that, click the plus button under the login items list and select the application you created. It should now appear in the list:</p>
+<p class="rtecenter">
+	<img alt="" src="/assets/5-added.png" style="width: 500px; height: 408px;" /></p>
+<p>
+	Fingers crossed, your network share should be mounted every single time you log in. If you feel like it, you can do the same for other users too.</p>
+<p>
+	<strong>But &lt;My Favourite Application&gt; still doesn&#39;t work!</strong></p>
+<p>
+	In my case, I set up Dropbox on the Mini so it&#39;s files were all on the Drobo. This way I had an extra local backup of my most important files, and visitors could get access (if I let them) without having to set up additional shares. But unfortunately, it didn&#39;t work!</p>
+<p>
+	Every time my Mac Mini started up, I got a handy and surprisingly verbose error message from Dropbox headed &quot;Dropbox Folder Missing&quot; telling me my Dropbox folder had been moved or deleted. I was a little perplexed by this, as I could clearly see the volume on my desktop.</p>
+<p>
+	As it turns out, because my automount script and Dropbox were both configured as Login Items, they were starting in parallel, so when Dropbox looked for the folder, it still wasn&#39;t accessible. That being the case, the fix was relatively simple:</p>
+<p>
+	<strong>4. Stop your application from launching at startup</strong></p>
+<p>
+	Dropbox has a preference for just that, as do many applications. Make sure this is turned off, and for safety, that the application doesn&#39;t appear in your Login Items (as in step 3).</p>
+<p>
+	<strong>5. Launch the application with your automount script</strong></p>
+<p>
+	Edit the script you created in step 2, adding the following:</p>
+<pre>
+<strong>tell application &quot;Dropbox&quot;
+&nbsp;&nbsp; &nbsp;activate
+end tell</strong>
+</pre>
+<p class="rtecenter">
+	<img alt="" src="/assets/6-scriptdropbox.png" style="width: 500px; height: 193px;" /></p>
+<p>
+	These lines will start Dropbox. As they run after the rest of the script, Dropbox won&#39;t start up until after the volume it needs has been mounted. You could add calls for multiple applications here. This won&#39;t necessarily work for all applications, but it&#39;s a good start.</p>
+<p>
+	So there you go. Not the easiest fix, I&#39;ll admit, but it&#39;ll hold us until Apple put in a decent automount option.</p>

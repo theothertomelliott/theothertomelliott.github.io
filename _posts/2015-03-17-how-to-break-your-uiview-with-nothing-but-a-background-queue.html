@@ -1,0 +1,42 @@
+---
+layout: post
+title: How to break your UIView with nothing but a background queue
+date: 2015-03-17 00:56:00.000000000 -04:00
+categories:
+- Coding
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  dsq_thread_id: '3601311691'
+  tc-thumb-fld: a:2:{s:9:"_thumb_id";i:1148;s:11:"_thumb_type";s:10:"attachment";}
+author:
+  login: Tom
+  email: tom.w.elliott@gmail.com
+  display_name: Tom
+  first_name: ''
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Docoptions: {}
+
+---
+<p>I recently found myself tearing my hair out over some very odd behaviours in XCode. Giving focus to a text view wasn't bringing up the keyboard, but I could still type where the keyboard should have appeared. I spent days trying various tweaks and changes to get it working, blaming this library and that library, but as it turned out, the solution was very simple.</p>
+<h1>PERFORM YOUR SEGUES ON THE MAIN QUEUE!</h1>
+<p><!--more--></p>
+<p>I'm aware I'm shouting, and you may think it's obvious, since you should run all you UI operations on the main queue. But I spent three days trying to figure this one out, that if one person remembers this, I'll have done my good deed for the year. It's so important, I'm going to repeat it.</p>
+<h1>PERFORM. YOUR. SEGUES. ON. THE. MAIN. QUEUE!</h1>
+<p>Got it? Awesome. Wondering what might happen if you get this wrong? I've put together a simple <a href="https://github.com/theothertomelliott/iOSSegueQueueDemo">demo</a> on GitHub that reproduces the problem and shows what can happen when you run into it. In short, it can turn a view like this:</p>
+<p><a href="/assets/SecondScreen-MainQueue.png"><img class=" wp-image-1147 aligncenter" src="/assets/SecondScreen-MainQueue.png" alt="SecondScreen-MainQueue" width="300" height="534" /></a></p>
+<p>&nbsp;</p>
+<p>into this:</p>
+<p><a href="/assets/SecondScreen-BackgroundQueue.png"><img class=" wp-image-1148 aligncenter" src="/assets/SecondScreen-BackgroundQueue.png" alt="SecondScreen-BackgroundQueue" width="300" height="534" /></a></p>
+<p>At least until something triggers a redraw of the view, which can take a few minutes. This is only the most obvious manifestation of the problem, if you see it, it may appear in a later view, or, as in my case, a misbehaving keyboard.</p>
+<p>The solution to this is simple:</p>
+<h1>PERFORM YOUR SEGUES ON THE MAIN QUEUE!</h1>
+<p>This could be an involved process, requiring careful consideration of the flow to each of your segues, specifically where they're called in blocks, or using asynchronous code.</p>
+<p>Alternatively, you could just wrap them all in a dispatch block:</p>
+<pre class="lang-c prettyprint prettyprinted">dispatch_async(dispatch_get_main_queue(), ^(void){
+   [self performSegueWithIdentifier:@"detailSegue" sender:self];
+});</pre>
+<p>I hope this saves someone the pain I had to go through. Just don't forget to perform your segues on the main queue.</p>
