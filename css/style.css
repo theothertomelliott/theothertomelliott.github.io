@@ -1,7 +1,40 @@
+/* Graphy for old posts */
+
 img {
 	height: auto; /* Make sure images are scaled correctly. */
 	max-width: 100%; /* Adhere to container width. */
 	vertical-align: middle;
+}
+
+/* Alignment */
+.aligncenter,
+.alignleft,
+.alignright {
+  margin-bottom: 24px;
+}
+.aligncenter {
+  clear: both;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+.alignleft {
+  display: inline;
+  float: left;
+  margin-right: 24px;
+}
+.alignright {
+  display: inline;
+  float: right;
+  margin-left: 24px;
+}
+@media screen and (min-width: 1180px) {
+  .no-sidebar .alignleft {
+    margin-left: -100px;
+  }
+  .no-sidebar .alignright {
+    margin-right: -100px;
+  }
 }
 
 /* ======================================================== */
