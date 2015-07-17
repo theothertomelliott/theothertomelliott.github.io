@@ -20,7 +20,11 @@ layout: default
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = 'theothertomelliott';
     {% if page.permalink %}
-    var disqus_url = 'http://www.theothertomelliott.com{{ page.permalink }}';
+      {% if page.legacy_comments %}
+        var disqus_url = 'http://www.theothertomelliott.com{{ page.permalink }}';
+      {% else %}
+        var disqus_url = 'http://telliott.io{{ page.permalink }}';
+      {% endif %}
     {% endif %}
     
     /* * * DON'T EDIT BELOW THIS LINE * * */

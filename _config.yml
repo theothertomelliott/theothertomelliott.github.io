@@ -12,4 +12,4 @@ github_username:  theothertomelliott
 markdown: kramdown
 paginate: 10
 
-include: ['_pages']
+include: ['_pages', '_posts_archive']
