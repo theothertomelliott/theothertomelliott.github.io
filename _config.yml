@@ -11,3 +11,5 @@ github_username:  theothertomelliott
 # Build settings
 markdown: kramdown
 paginate: 10
+
+include: ['_pages']
