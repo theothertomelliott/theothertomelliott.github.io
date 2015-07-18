@@ -1,6 +1,7 @@
 ---
 layout: default
 ---
+
 <div class="post">
 
   <header class="post-header">
@@ -23,8 +24,10 @@ layout: default
       {% if page.legacy_comments %}
         var disqus_url = 'http://www.theothertomelliott.com{{ page.permalink }}';
       {% else %}
-        var disqus_url = 'http://telliott.io{{ page.permalink }}';
+        var disqus_url = '{{ site.url }}{{ page.permalink }}';
       {% endif %}
+    {% else %}
+      var disqus_url = '{{ site.url }}{{ page.url }}';
     {% endif %}
     
     /* * * DON'T EDIT BELOW THIS LINE * * */
