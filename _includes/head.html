@@ -17,7 +17,7 @@
 {% else if site.image %}
   <meta name="twitter:image" content="{{ site.url }}{{ site.image }}" />
 {% endif %}
-<meta property="og:url" content="{{ site.url }}{{ page.url }}" />
+<meta property="og:url" content="{{ site.url }}{{ page.url | replace: '/index.html', '/' }}" />
 
 <!-- Facebook OpenGraph metatags -->
 <!-- Can be tested at https://developers.facebook.com/tools/debug/ -->
