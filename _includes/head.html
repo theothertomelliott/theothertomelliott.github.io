@@ -6,7 +6,7 @@
   <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
   <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 
-  <!-- Twitter card metatags -->
+<!-- Twitter card metatags -->
 <!-- Can be tested at https://cards-dev.twitter.com/validator -->
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@{{ site.twitter_username }}" />
@@ -16,6 +16,18 @@
   <meta name="twitter:image" content="{{ site.url }}{{ page.image }}" />
 {% else if site.image %}
   <meta name="twitter:image" content="{{ site.url }}{{ site.image }}" />
+{% endif %}
+
+<!-- Facebook OpenGraph metatags -->
+<!-- Can be tested at https://developers.facebook.com/tools/debug/ -->
+<meta property="og:title"
+content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}" />
+<meta property="og:site_name" content="{{ site.title }}"/>
+<meta property="og:description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}" />
+{% if page.image %}
+  <meta property="og:image" content="{{ site.url }}{{ page.image }}" />
+{% else if site.image %}
+  <meta property="og:image" content="{{ site.url }}{{ site.image }}" />
 {% endif %}
 
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"/>
