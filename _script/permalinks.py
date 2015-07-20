@@ -41,6 +41,7 @@ def processPost(file):
         return
 
     # Test against stored nodes and live nodes on the web to identify the actual node number of this post
+    # WARNING: If there is no live URL matching the title, this will run forever
     i = 0
     while not testNodeNumber(i,title):
     	i = i + 1
