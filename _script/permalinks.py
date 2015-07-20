@@ -4,7 +4,7 @@ import urllib
 
 # Work on files in the Jekyll posts dir
 # Expects to be run from the _script dir
-rootdir = '../_posts/2008/'
+rootdir = '../_posts/'
 
 # Dictionary to store previously matched titles and nodes
 titlesByNode = {}
@@ -57,7 +57,7 @@ def processPost(file):
     out.close()
 
 # Iterate over all post files (assume there are only posts in the rootdir)
-# Process each post in turn, updating the current node number as required
+# Process each post in turn to add a permalink
 for subdir, dirs, files in os.walk(rootdir):
     for file in files:
         processPost(os.path.join(subdir, file))
