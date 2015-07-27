@@ -42,4 +42,10 @@ The frustratingly simple fix for this was to add the following line to my Gemfil
 gem 'jekyll'
 {% endhighlight %}
 
-Then run a quick `bundle install` to refresh the lock file.
+Or, if you're using Github Pages like me:
+
+{% highlight ruby %}
+gem 'github-pages'
+{% endhighlight %}
+
+Then run a quick `bundle install` to refresh the lock file. If it still doesn't work, it may be necessary to run `bundle clean --force` and then another install, but this will wipe **ALL** your existing installed Gems.
