@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Keeping iOS and watchOS2 apps synchronized with WatchConnectivity"
-published: true
+published: false
 visible: 0
 tags:
  -
