@@ -13,4 +13,4 @@ image: /img/logo.jpg
 markdown: kramdown
 paginate: 10
 
-include: ['_pages', '_posts_archive']
+include: ['_pages', '_posts_archive', '_drafts']

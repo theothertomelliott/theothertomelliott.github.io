@@ -1,8 +1,7 @@
 ---
 layout: post
 title: "Keeping iOS and watchOS2 apps synchronized with WatchConnectivity"
-published: false
-visible: 0
+published: true
 tags:
  -
 ---
@@ -51,7 +50,7 @@ You should now see the framework in your project settings:
 
 ![](/assets/how-to-communicate-between-ios-and-watchos2/step2-addwatchconnectivity-2.png){: .center-block}
 
-## 3. Set up your iOS UIView and UIViewController 
+## 3. Set up your iOS UIView and UIViewController
 GitHub: [Swift](https://github.com/theothertomelliott/WatchConnectivityExamples/commit/ccbb5689fc038b40486bebb4c99416766d28eded) | Objective-C
 
 We want to have something to send from our iOS app to our watchOS app, so next we'll add a **UITextField** to our main **UIView** in the storyboard, and add an outlet and action to our UIViewController, the **ViewController** class.
@@ -71,7 +70,7 @@ Firstly, the watchOS equivalent of UIViews are called **WKInterface**s, with **W
 
 Open the *WatchKit App* group in your project, and select Interface.storyboard to bring up the watch interface for editing.
 
-Drag a label in to your interface and open it's attributes inspector. 
+Drag a label in to your interface and open it's attributes inspector.
 
 ![](/assets/how-to-communicate-between-ios-and-watchos2/step4-addlabel.png){: .center-block}
 
@@ -96,7 +95,7 @@ In the **ViewController** class, import the WatchConnectivity class and add a de
 
 {% highlight objective-c %}
 import WatchConnectivity
- 
+
 class ViewController: UIViewController, WCSessionDelegate {
 {% endhighlight %}
 
@@ -114,7 +113,7 @@ Then initialize and activate this session in your *viewDidLoad* method:
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+
         /*
          * If this device can support a WatchConnectivity session,
          * obtain a session and activate.
@@ -150,7 +149,7 @@ For the watchOS interface, we'll be activating the session in the willActivate m
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
-        
+
         if(WCSession.isSupported()){
             watchSession = WCSession.defaultSession()
             // Add self as a delegate of the session so we can handle messages
