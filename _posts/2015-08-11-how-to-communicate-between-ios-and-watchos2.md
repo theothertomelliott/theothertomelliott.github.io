@@ -2,6 +2,7 @@
 layout: post
 title: "Keeping iOS and watchOS2 apps synchronized with WatchConnectivity"
 published: true
+image: /assets/xcode-icon.png
 tags:
  -
 ---
@@ -16,7 +17,7 @@ This tutorial is intended to give you a brief introduction to WatchConnectivity,
 
 Full source is available on GitHub, and each step of the tutorial will include a link to the associated commit.
 
-Example code on this page and the main repo is in Swift 2, but there will soon be an Objective-C version on a separate branch.
+Example code on this page and the main repo is in Swift 2, but there is also an Objective-C version on a separate branch linked in each step.
 
 # Prerequisites
 
@@ -27,7 +28,7 @@ You will need to have the XCode 7, which is in beta at the time of this writing.
 # Instructions
 
 ## 1. Create a new project with WatchKit
-GitHub: [Swift](https://github.com/theothertomelliott/WatchConnectivityExamples/commit/51f7f210d07342e8a734be002aa67b676c221a99) | Objective-C
+GitHub: [Swift](https://github.com/theothertomelliott/WatchConnectivityExamples/commit/51f7f210d07342e8a734be002aa67b676c221a99) | [Objective-C](https://github.com/theothertomelliott/WatchConnectivityExamples/commit/75f45b29ec65e8ecf5d231bbb6d8c532ae941822)
 
 First thing's first, we need a project to work in. Choose *File->New->Project...* to open the project template dialog, then select *watchOS->Application* to bring up the (currently only) watchOS+iOS app option:
 
@@ -38,7 +39,7 @@ Press next to bring up the project options. For this example we'll be using a Sw
 ![](/assets/how-to-communicate-between-ios-and-watchos2/step1-createproject-2.png){: .center-block}
 
 ## 2. Add the WatchConnectivity framework
-GitHub: [Swift](https://github.com/theothertomelliott/WatchConnectivityExamples/commit/b5f5bae0f0f71bbcefee42471711e1e5ef158204) | Objective-C
+GitHub: [Swift](https://github.com/theothertomelliott/WatchConnectivityExamples/commit/b5f5bae0f0f71bbcefee42471711e1e5ef158204) | [Objective-C](https://github.com/theothertomelliott/WatchConnectivityExamples/commit/5fe3a7184971ee55c4cf00ce3f1cadbec86e0c4e)
 
 Next, we need to add the WatchConnectivity framework to our application so we can make use of the WCSession classes.
 
@@ -51,7 +52,7 @@ You should now see the framework in your project settings:
 ![](/assets/how-to-communicate-between-ios-and-watchos2/step2-addwatchconnectivity-2.png){: .center-block}
 
 ## 3. Set up your iOS UIView and UIViewController
-GitHub: [Swift](https://github.com/theothertomelliott/WatchConnectivityExamples/commit/ccbb5689fc038b40486bebb4c99416766d28eded) | Objective-C
+GitHub: [Swift](https://github.com/theothertomelliott/WatchConnectivityExamples/commit/ccbb5689fc038b40486bebb4c99416766d28eded) | [Objective-C](https://github.com/theothertomelliott/WatchConnectivityExamples/commit/abfc55332ec7c181180082125eb0564036d4fbd1)
 
 We want to have something to send from our iOS app to our watchOS app, so next we'll add a **UITextField** to our main **UIView** in the storyboard, and add an outlet and action to our UIViewController, the **ViewController** class.
 
@@ -62,7 +63,7 @@ For our action, I've used "editing changed", as this gives the most immediate re
 ![](/assets/how-to-communicate-between-ios-and-watchos2/step3-2-outletandaction.png){: .center-block}
 
 ## 4. Set up your WatchKit App WKInterface and WatchKit Extension WKInterfaceController
-GitHub: [Swift](https://github.com/theothertomelliott/WatchConnectivityExamples/commit/69f0066f640acdac67f5f80f8ce1e19db2442afb) | Objective-C
+GitHub: [Swift](https://github.com/theothertomelliott/WatchConnectivityExamples/commit/69f0066f640acdac67f5f80f8ce1e19db2442afb) | [Objective-C](https://github.com/theothertomelliott/WatchConnectivityExamples/commit/fc139f106cce8950118e23176d13e3f05ea47f0b)
 
 Next we need somewhere to receive the text we'll be sending to our watchOS app. This is a similar process to setting up our iOS interface, but with a few important differences.
 
@@ -87,7 +88,7 @@ Now you can add an outlet for the label to your InterfaceController, in much the
 ![](/assets/how-to-communicate-between-ios-and-watchos2/step4-addoutlet.png){: .center-block}
 
 ## 5. Add a WCSession to your UIViewController
-GitHub: [Swift](https://github.com/theothertomelliott/WatchConnectivityExamples/commit/4fe4c8e28f526dc762bace8bf05cdcf1cc69b69c) | Objective-C
+GitHub: [Swift](https://github.com/theothertomelliott/WatchConnectivityExamples/commit/4fe4c8e28f526dc762bace8bf05cdcf1cc69b69c) | [Objective-C](https://github.com/theothertomelliott/WatchConnectivityExamples/commit/8fa69581691e1ba10ce48676c614910936f1bb07)
 
 Now we can get into using WatchConnection proper. Let's start with the iOS app.
 
@@ -130,7 +131,7 @@ Then initialize and activate this session in your *viewDidLoad* method:
 {% endhighlight %}
 
 ## 6. Add a WCSession to your WKInterfaceController
-GitHub [Swift](https://github.com/theothertomelliott/WatchConnectivityExamples/commit/8958f5dbacd1a362d895ffbf388361ab58dbc5ce) | Objective-C
+GitHub [Swift](https://github.com/theothertomelliott/WatchConnectivityExamples/commit/8958f5dbacd1a362d895ffbf388361ab58dbc5ce) | [Objective-C](https://github.com/theothertomelliott/WatchConnectivityExamples/commit/20857655aa4b4972a4ccf1877472b9d3b1c48b97)
 
 Now we need to repeat step 5 for our watchOS app. In the **InterfaceController** class, add the WatchConnectivity import, WCSessionDelegate declaration and WCSession property as before:
 
@@ -162,7 +163,7 @@ For the watchOS interface, we'll be activating the session in the willActivate m
 Now we have our iOS and watchOS apps connected, but we still need to send some data between them.
 
 ## 7. Update application state when the text field changes to change the label
-GitHub: [Swift](https://github.com/theothertomelliott/WatchConnectivityExamples/commit/84940a5dad02a6f81aff57f9331584d95431c09b) | Objective-C
+GitHub: [Swift](https://github.com/theothertomelliott/WatchConnectivityExamples/commit/84940a5dad02a6f81aff57f9331584d95431c09b) | [Objective-C](https://github.com/theothertomelliott/WatchConnectivityExamples/commit/a960db0a5faa3503cfeab20c386b5012aee6e6be)
 
 To keep the watchOS app updated on the contents of our text field, add a call to updateApplicationContext in the text field update action:
 
