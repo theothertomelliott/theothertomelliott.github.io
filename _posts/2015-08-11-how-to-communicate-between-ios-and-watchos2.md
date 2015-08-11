@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Keeping iOS and watchOS2 apps synchronized with WatchConnectivity"
+title: "Tutorial: Keep your iOS and watchOS2 apps synchronized with WatchConnectivity"
 published: true
 image: /assets/xcode-icon.png
 tags:
