@@ -119,6 +119,9 @@ Then initialize and activate this session in your *viewDidLoad* method:
          * If this device can support a WatchConnectivity session,
          * obtain a session and activate.
          *
+         * It isn't usually recommended to put this in viewDidLoad, 
+         * we're only doing it here to keep the app simple
+         *
          * Note: Even though we won't be receiving messages in the View Controller,
          * we still need to supply a delegate to activate the session
          */
@@ -129,6 +132,8 @@ Then initialize and activate this session in your *viewDidLoad* method:
         }
     }
 {% endhighlight %}
+
+It's important to note that activating the session in viewDidLoad can result in the session not being created if your app is launched in the background. Hence in real-world apps you would want to put this code on a path you can guarantee will be executed even if your app launches in the background. Thanks to [@maxhasadhd](https://twitter.com/maxhasadhd) for pointing this out!
 
 ## 6. Add a WCSession to your WKInterfaceController
 GitHub [Swift](https://github.com/theothertomelliott/WatchConnectivityExamples/commit/8958f5dbacd1a362d895ffbf388361ab58dbc5ce) | [Objective-C](https://github.com/theothertomelliott/WatchConnectivityExamples/commit/20857655aa4b4972a4ccf1877472b9d3b1c48b97)
