@@ -20,11 +20,11 @@ First off, as I mentioned, tvOS is very similar to iOS in terms of the app SDK. 
 
 While I didn't delve too deeply, I was able to copy over most of my code from the Invaders project verbatim, just making a few tweaks for places where the  OSX APIs differed from iOS.
 
-A cursory look at the UIKit elements available to a skeleton project suggests that UIKit is similarly compatible, although the standard controls look totally different on tvOS (`UITabBarController`, for example, appears at the top of the screen as a menu that disappears when you select a tab).
+A cursory look at the UIKit elements available to a skeleton project suggests that UIKit is similarly compatible, although the standard controls look totally different on tvOS. `UITabBarController`, for example, appears at the top of the screen as a menu that disappears when you select a tab.
 
 ![Tab Bars on tvOS](/assets/tabbars-on-tvos1.png)
 
-This doesn't mean that porting your iOS apps will be 100% straightforward, however, as there are some notable differences.
+So while you can share a lot of code, this doesn't mean that porting your iOS apps will be 100% straightforward, as there are some major differences between the platforms.
 
 # User Interaction
 
