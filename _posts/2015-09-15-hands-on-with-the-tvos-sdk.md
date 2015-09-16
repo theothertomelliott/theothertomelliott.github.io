@@ -8,7 +8,7 @@ tags:
 
 Last Wednesday, Apple announced a slew of new products, among them was the "New Apple TV", which finally brings third party apps to the Apple TV platform. While the hardware won't be available until later in the year, a new beta of Xcode 7.1 was released immediately after the keynote, with the tvOS SDK ready to go.
 
-I couldn't resist firing it up and having a play around, and the good news is, the SDK will be familiar to any iOS developer (or indeed OS X developer). After a couple of hours, I'd managed to port over a playable version of my SpriteKit Space Invaders project:
+I couldn't resist firing it up and having a play around, and the good news is, the SDK will be familiar to any iOS developer (or indeed OS X developer). After a couple of hours, I'd managed to port over a playable version of my [SpriteKit Space Invaders](https://github.com/theothertomelliott/SpriteKitInvaders) project:
 
 ![Space Invaders on tvOS](/assets/invaders-on-tvos1.png)
 
