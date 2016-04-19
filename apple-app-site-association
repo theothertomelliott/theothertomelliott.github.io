@@ -1,10 +1,10 @@
 {
-    - applinks: {
-          apps: [],
-        - details: [
-            - {
-                appID: "XZ59JQ28M5.com.telliott.powerlistings",
-                - paths: [
+    "applinks": {
+        "apps": [],
+        "details": [
+             {
+                "appID": "XZ59JQ28M5.com.telliott.powerlistings",
+                "paths": [
                     "*"
                   ]
                }
