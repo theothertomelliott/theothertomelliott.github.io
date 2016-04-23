@@ -13,4 +13,8 @@ image: /img/logo.jpg
 markdown: kramdown
 paginate: 10
 
+future: true
+
+gems: [jekyll-paginate, jekyll-watch]
+
 include: ['_pages', '_posts_archive', '_drafts']
