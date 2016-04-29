@@ -41,3 +41,5 @@ This had the added advantage of forwarding container ports directly to localhost
 Overall, Docker for Mac looks very promising. Granted, there are some rough edges, as is to be expected from beta software, but with the community as active as it is, I have high hopes that the final release will be well worth the wait.
 
 Unfortunately, due to the system requirements, it's unlikely this solution will completely replace VirtualBox VMs for many users, as there are still many older Macs out there.
+
+**UPDATE (04/23/2016):** Docker for Mac beta 9 was just released, and this makes localhost the default for port mapping. Not only that, but I’ve noticed something of a speed boost when building my current project!
