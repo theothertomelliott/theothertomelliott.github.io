@@ -13,6 +13,10 @@ image: /img/logo.jpg
 markdown: kramdown
 paginate: 10
 
+# Disable smart quotes
+kramdown:
+    smart_quotes: ["apos", "apos", "quot", "quot"]
+
 future: true
 
 gems: [jekyll-paginate, jekyll-watch]
