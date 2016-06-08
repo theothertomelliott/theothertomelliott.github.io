@@ -18,6 +18,8 @@ The menus have also been improved, and you can reach the demo mode directly from
 
 A few crashes here and there have also been fixed, for a smoother, more stable experience.
 
+A huge thanks to [@C_is_for_Cody](https://twitter.com/C_is_for_Cody) for UI advice, and to the [Product Hunt](https://www.producthunt.com/) community in general for all their feedback.
+
 Happy speaking!
 
 [![App Store](/assets/appstore-badge.svg)](https://itunes.apple.com/us/app/speaker-alert/id488585337?mt=8)
