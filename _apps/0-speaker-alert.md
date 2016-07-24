@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Speaker Alert"
-link: /Speaker-Alert
+link: https://itunes.apple.com/app/apple-store/id488585337?pt=91596&ct=telliott.io%20sidebar&mt=8
 image: /media/app-icons/speaker-alert.png
 description: A simple app to end your speeches, presentations and meetings on time 🔔
 platforms: iOS
