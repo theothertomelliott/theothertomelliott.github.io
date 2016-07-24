@@ -4,14 +4,34 @@
   {% include head.html %}
 
   <body>
-    <div class="container">
-
-    {% include header.html %}
-
-    <div class="page-content">
-      <div class="wrapper">
-        {{ content }}
+    <div id="header" class="col-sm-offset-2 col-sm-8 clearfix" role="header">
+      <div class="container">
+        {% include header.html %}
       </div>
+    </div>
+
+    <div id="main" class="col-sm-offset-2 col-sm-8" role="main">
+      <div class="container">
+        <div class="page-content">
+          <div class="wrapper">
+            {{ content }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="sidebar1" class="col-sm-2" role="complementary">
+		    <h3>Apps</h3>
+		    {% for app in site.apps %}
+		    <div class="panel panel-default">
+			    <div class="panel-body">
+		    <h4><a href="{{ app.link }}">{{ app.title }}</a></h4>
+		      <p class="text-center"><img src="{{ app.image }}"/></p>
+		      <p><small>{{ app.description }}</small></p>
+		      <p><small>Platforms: {{ app.platforms }}</small></p>
+			    </div>
+		    </div>
+		    {% endfor %}
     </div>
 
     {% include footer.html %}

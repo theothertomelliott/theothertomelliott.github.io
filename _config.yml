@@ -22,3 +22,6 @@ future: true
 gems: [jekyll-paginate, jekyll-watch]
 
 include: ['_pages', '_posts_archive', '_drafts']
+
+collections:
+        - apps
