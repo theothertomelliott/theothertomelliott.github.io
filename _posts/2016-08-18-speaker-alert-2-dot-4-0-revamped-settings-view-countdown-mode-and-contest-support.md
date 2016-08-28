@@ -6,7 +6,7 @@ image: /assets/SpeakerAlert-Icon.png
 
 Version 2.4.0 of Speaker Alert is now available in the app store. This version overhauls the settings screens and provides a number of new options to give you exactly the view you need during your speech.
 
-![Updated Settings View]({{ site.github.url }}/media/speaker-alert-2-dot-4-0-revamped-settings-view-countdown-mode-and-contest-support/SettingsScreen.png){: .aligncenter}
+![Updated Settings View]({{ site.github.url | replace:'http://','https://' }}/media/speaker-alert-2-dot-4-0-revamped-settings-view-countdown-mode-and-contest-support/SettingsScreen.png){: .aligncenter}
 
 ### New Options
 
