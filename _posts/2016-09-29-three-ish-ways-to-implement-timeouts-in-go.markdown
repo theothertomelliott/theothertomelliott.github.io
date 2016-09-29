@@ -9,7 +9,7 @@ Timeouts are a common concurrency pattern. You want to wait for a long-running t
 
 ## Method the first: Quick and Dirty
 
-The first method is the one that I'd imagine most people would try first, because it uses concepts common to many languages, and because it is outlined in a [blog post](https://blog.golang.org/go-concurrency-patterns-timing-out-and) from 2010 that ranks high in Google searches for "golang timeout". Using time.Sleep:
+The first method is the one that I'd imagine most people would try first, because it uses concepts common to many languages, and because it is outlined in a [blog post](https://blog.golang.org/go-concurrency-patterns-timing-out-and) from 2010 that ranks high in Google searches for "golang timeout". Using `time.Sleep`:
 
 {% highlight go %}
 ch := make(chan bool, 1)
@@ -37,6 +37,9 @@ This example will wait until it either receives something from ch or the timeout
 {% highlight go %}
 ch := make(chan bool, 1)
 timeout := make(chan bool, 1)
+defer close(ch)
+defer close(timeout)
+
 go func() {
   time.Sleep(1 * time.Second)
   timeout <- true
@@ -53,11 +56,9 @@ case <-timeout:
   fmt.Println("Timed out")
 }
 
-close(ch)
-close(timeout)
 {% endhighlight %}
 
-[Go Playground](https://play.golang.org/p/xaCiYlekk7)
+[Go Playground](https://play.golang.org/p/MD0idCIB87)
 
 ## Method B: One line, no waiting (well, some)
 
@@ -65,6 +66,7 @@ Helpfully, the time package comes to the rescue with [`After`](https://golang.or
 
 {% highlight go %}
 ch := make(chan bool, 1)
+defer close(ch)
 
 go func() {
   ch <- true
@@ -77,10 +79,9 @@ case <-time.After(1 * time.Second):
   fmt.Println("Timed out")
 }
 
-close(ch)
 {% endhighlight %}
 
-[Go Playground](https://play.golang.org/p/Y3bcbVu4WB)
+[Go Playground](https://play.golang.org/p/ux3T5S33YQ)
 
 Since we don't hold on to the channel after our select statement, the garbage collector will clean everything up for us after the timeout elapses. For long-running apps that don't have to deal with timeouts often, this should be fine. But in a lot of cases, we want to make sure we clean everything up then and there.
 
@@ -90,12 +91,14 @@ If you took a look at the godoc for `time.After`, you may have already been dire
 
 {% highlight go %}
 ch := make(chan bool, 1)
+defer close(ch)
 
 go func() {
   ch <- true
 }()
 
 timer := time.NewTimer(1 * time.Second)
+defer timer.Stop()
 
 select {
 case <-ch:
@@ -103,12 +106,9 @@ case <-ch:
 case <-timer.C:
   fmt.Println("Timed out")
 }
-
-close(ch)
-timer.Stop()
 {% endhighlight %}
 
-[Go Playground](https://play.golang.org/p/q-EG95xekD)
+[Go Playground](https://play.golang.org/p/70hu-xaSZV)
 
 This requires slightly more code than the previous example, but you can rest easy knowing that when your function returns, all of the channels it was using have been cleaned up.
 
