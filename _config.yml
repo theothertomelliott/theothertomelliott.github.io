@@ -19,7 +19,7 @@ kramdown:
 
 future: true
 
-gems: [jekyll-paginate, jekyll-watch]
+gems: [jekyll-paginate, jekyll-watch, jekyll-seo-tag]
 
 include: ['_pages', '_posts_archive', '_drafts']
 
