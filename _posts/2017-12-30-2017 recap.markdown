@@ -1,0 +1,42 @@
+---
+layout: post
+title: "2017 Recap"
+date: "2017-12-30 18:20:24 -0500"
+image: /assets/new-year1.jpg
+---
+
+I managed to go the whole year without posting anything to this blog, but that's not to say I haven't been busy. Here's a quick outline of some of the things I've been working on outside of this particular domain.
+
+Suffice to say I've been busy during my day job at [Yext](http://www.yext.com), maintaining the [Pages](http://www.yext.co.uk/products/pages/) product, adding such features as [Knowledge Tags](http://www.yext.co.uk/products/pages/features/) during the last six months or so.
+
+# Tech Talks
+
+My main focus outside of work this year has been to deliver technical talks as often as possible. The first of these was in January at the [Go Language NYC](https://www.meetup.com/golanguagenewyork/) meetup: "Going all in with Go for CLI Apps", the slides for which are below.
+
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/5cqPxdnboUL5XX" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/TomElliott16/going-allin-with-go-for-cli-apps" title="Going All-In With Go For CLI Apps" target="_blank">Going All-In With Go For CLI Apps</a> </strong> from <strong><a target="_blank" href="//www.slideshare.net/TomElliott16">Tom Elliott</a></strong> </div>
+
+Following this, I went on to give several talks outlining [Edward](https://github.com/yext/edward), an open source tool for running microservices on a local development machine. Variations on this talk were given at Go Language NYC, [NYC Golang](https://www.meetup.com/nycgolang/events/240651548/) and as a lightning talk at [GoperCon 2017](https://gophercon.com/). Video of the latter is embedded below: 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/vqLhLMm-mE4" frameborder="0" allowfullscreen></iframe>
+
+For 2018, I'll be trying to up my speaking game a bit and seeking out meetups and perhaps even conferences in need of speakers. Any recommendations, feel free to let me know! I'll also be putting together a few outlines for possible future talks.
+
+# Hacktoberfest
+
+In October, I signed up to DigitalOcean's [Hacktoberfest](https://hacktoberfest.digitalocean.com/), a global challenge to increase contribution in Open Source development. Make four or more open source constributions, and receive a t-shirt along with a pile of stickers and a warm glow of satisfaction.
+
+I took the opportunity to address some outstanding issues in some repositories we use fairly regularly at Yext, including [robfig/cron](https://github.com/robfig/cron), [robfig/soy](https://github.com/robfig/soy) and [peterbourgon/diskv](https://github.com/peterbourgon/diskv). I also added the Hacktoberfest tag to a couple of issues in the Edward repo, which got us a little bit of welcome help from the community. I can heartily recommend Hacktoberfest for anyone looking to get involved in open source, or attract contributors to their own projects.
+
+# Works in Progress
+
+Finally, there are a number of side projects I got started on that aren't quite ready for a wider audience yet, usually for want of documentation or a example code, but watch this space for more on these projects and others.
+
+[struct2struct](https://github.com/theothertomelliott/struct2struct) is a Go library that allows easy conversion from one struct type to another either via matching field names or using tags. The original use case for this being handling the conversion from a protobuf to an existing legacy model struct.
+
+[PairPad](https://github.com/theothertomelliott/pairpad) is a webapp that creates a shared document for writing code in phone interviews or similar situations. This was primarily a weekend challenge to myself to implement a webapp in Go using only the standard libraries. This was made considerably easier by [Ace](https://ace.c9.io/), a JavaScript library providing a code editor. The readme includes a deploy to Heroku button to make it easy to try for yourself. Sessions are currently stored in-memory, so I wouldn't want to use it for real interviews, but it isn't far off.
+
+[GiftList](https://github.com/theothertomelliott/giftlist) is a webapp written using [Buffalo](https://gobuffalo.io/) that helped me manage my Christmas shopping for this year, replacing a spreadsheet I'd been using since about 2011. Buffalo made it incredibly straightforward to build the CRUD sections of the site, leaving me to concentrate on the more custom logic. Lots of things to clean up, but I've got until next Thanksgiving before it'll be needed again.
+
+# Roll on 2018
+
+With the New Year fast approaching, I'm probably not going to go all-in on resolutions as I did in previous years, but hopefully I'll be a little more active in the community, and on this blog! See you in 2018!
